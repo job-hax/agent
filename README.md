@@ -12,9 +12,9 @@ sudo easy_install pip
 ```
 - Create a console project on Google and turn on the Gmail API. Follow Step 1 [here](https://developers.google.com/gmail/api/quickstart/python)
 - Make sure your 'credentials.json' exists on same folder with .py file
-- Install Google APIs Client Library for Python using command below
+- Install dependencies using command below
 ```
-pip install --upgrade google-api-python-client
+pip install -r requirements.txt
 ```
 
 ### Usage
