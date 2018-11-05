@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %} | Register Account {% endblock %}
+
+{% block content %}
+<!-- Main Content -->
+  <section id="showcase-inner" class="py-5 text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="py-3 text-white">User Metrics</h1>
+          <p class="lead">Track Your Job Application Statistics</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- Breadcrumb -->
+  <section id="bc" class="mt-3">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'index' %}">
+              <i class="fas fa-home"></i> Home</a>
+          </li>
+          <li class="breadcrumb-item active"> Metrics</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Alerts -->
+  {% include 'partials/_alerts.html' %}
+
+  <!-- Metrics Introduction-->
+
+ <section id="metrics" class="py-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+            <h2>Welcome {{ user.first_name }}!</h2>
+            <p style="padding-bottom:30px">Here are your job applications statistics</p>
+        </div>
+      </div>
+    </div>
+ </section>
+
+  <!-- Metric1: Total Amount of Job Applications -->
+ <section id="metric1" class="py-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+            <h4>You have applied 28 jobs so far!</h4>
+            <p style="padding-bottom:20px">That means you have already taken 28 steps towards your perfect job!</p>
+        </div>
+      </div>
+    </div>
+ </section>
+
+  <!-- Metric2: Amounth of Job Applications per Month-->
+ <section id="metric2" class="py-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+            <h4>Monthly application chart</h4>
+            <p style="padding-bottom:20px">You can easily track how many applications you have made each month</p>
+        </div>
+      </div>
+    </div>
+ </section>
+
+  {% endblock %}

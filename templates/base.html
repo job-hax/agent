@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{% static 'css/all.css' %}">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+  <link rel="stylesheet" href="{% static 'css/vendors/linericon/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/vendors/owl-carousel/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/vendors/lightbox/simpleLightbox.css' %}">
+  <link rel="stylesheet" href="{% static 'css/vendors/nice-select/css/nice-select.css' %}">
+  <link rel="stylesheet" href="{% static 'css/vendors/animate-css/animate.css' %}">
+  <link rel="stylesheet" href="{% static 'css/vendors/popup/magnific-popup.css' %}">
+  <!-- Custom -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+  <!-- Lightbox -->
+  <link rel="stylesheet" href="{% static 'css/lightbox.min.css' %}">
+  <!-- AddNew -->
+  <link rel='stylesheet' href='https://unpkg.com/antd/dist/antd.css'>
+  <link rel="stylesheet" href="{% static 'css/addnew.css' %}">
+
+  <title>Error CV {% block title %}{% endblock %}</title>
+</head>
+
+<body>
+  <!-- Top Bar -->
+  {% include 'partials/_topbar.html' %}
+  <!-- NavBar -->
+  {% include 'partials/_navbar.html' %}
+    <!-- Main Content -->
+  {% block content %} {% endblock %}
+  <!-- Footer -->
+  {% include 'partials/_footer.html' %}
+  
+
+  <script src="{% static 'js/jquery-3.3.1.min.js' %} "></script>
+  <script src="{% static 'js/bootstrap.bundle.min.js' %} "></script>
+  <script src="{% static 'js/lightbox.min.js' %} "></script>
+  <script src="{% static 'js/main.js' %} "></script>
+  <script src="{% static 'js/extra_js/popper.js' %} "></script>
+  <script src="{% static 'js/extra_js/bootstrap.min.js' %} "></script>
+  <script src="{% static 'js/extra_js/stellar.js' %} "></script>
+  <script src="{% static 'css/vendors/lightbox/simpleLightbox.min.js' %} "></script>
+  <script src="{% static 'css/vendors/nice-select/js/jquery.nice-select.min.js' %} "></script>
+  <script src="{% static 'css/vendors/isotope/imagesloaded.pkgd.min.js' %} "></script>
+  <script src="{% static 'css/vendors/isotope/isotope-min.js' %} "></script>
+  <script src="{% static 'css/vendors/owl-carousel/owl.carousel.min.js' %} "></script>
+  <script src="{% static 'js/extra_js/jquery.ajaxchimp.min.js' %} "></script>
+  <script src="{% static 'css/vendors/counter-up/jquery.waypoints.min.js' %} "></script>
+  <script src="{% static 'css/vendors/counter-up/jquery.counterup.js' %} "></script>
+  <script src="{% static 'js/extra_js/mail-script.js' %} "></script>
+  <script src="{% static 'css/vendors/popup/jquery.magnific-popup.min.js' %} "></script>
+  <script src="{% static 'js/extra_js/theme.js' %} "></script>
+</body>
+
+</html>

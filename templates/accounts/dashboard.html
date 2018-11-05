@@ -1,0 +1,205 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- PDF, CSV ... -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/table_style/jquery.dataTables.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/table_style/buttons.dataTables.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/Calendar_jquery-ui.css' %}">
+  <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static 'css/all.css' %}">
+  <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+  <!-- Custom -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <!-- Lightbox -->
+    <link rel="stylesheet" href="{% static 'css/lightbox.min.css' %}">
+  <!-- AntDesign -->
+    <link rel='stylesheet' href="{% static 'css/antd.css' %}">
+
+  <!-- TITLE -->
+    <title>Error CV Dashboard {% block title %}{% endblock %}</title>
+
+
+    <style type="text/css" class="init"></style>
+    <script src="{% static 'scripts/table_scripts/jquery-1.12.3.js' %} "></script>
+    <script src="{% static 'scripts/table_scripts/jquery.dataTables.min.js' %} "></script>
+    <script src="{% static 'scripts/table_scripts/dataTables.buttons.min.js' %} "></script>
+    <script src="{% static 'scripts/table_scripts/buttons.flash.min.js' %} "></script>
+    <script src="{% static 'scripts/table_scripts/jszip.min.js' %} "></script>
+    <script src="{% static 'scripts/table_scripts/pdfmake.min.js' %} "></script>
+    <script src="{% static 'scripts/table_scripts/vfs_fonts.js' %} "></script>
+    <script src="{% static 'scripts/table_scripts/buttons.html5.min.js' %} "></script>
+    <script src="{% static 'scripts/table_scripts/buttons.print.min.js' %} "></script>
+    <script src="{% static 'scripts/calendar_scripts/jquery-ui.js' %} "></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %} "></script>
+    <script src="{% static 'js/lightbox.min.js' %} "></script>
+    <script src="{% static 'js/main.js' %} "></script>
+    <script type="text/javascript" class="init">
+	    $(document).ready(function() {
+		    $('#example').DataTable( {
+		        dom: 'Bfrtip',
+		        buttons: [ 'copy', 'csv' ]
+		        } );
+		    } );
+	</script>
+    <script>
+	    $( function() {
+		    $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
+		    $( "#datepicker1" ).datepicker({ dateFormat: 'yy-mm-dd' });
+		    } );
+	</script>
+</head>
+
+<body class="wide comments example">
+
+  <!-- Top Bar -->
+  {% include 'partials/_topbar.html' %}
+  <!-- NavBar -->
+  {% include 'partials/_navbar.html' %}
+
+
+
+
+<!-- Main Content -->
+  <section id="showcase-inner" class="py-5 text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="py-3 text-white">User Dashboard</h1>
+          <p class="lead">Manage your Job Application State</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- Breadcrumb -->
+  <section id="bc" class="mt-3">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'index' %}">
+              <i class="fas fa-home"></i> Home</a>
+          </li>
+          <li class="breadcrumb-item active"> Dashboard</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Alerts -->
+  {% include 'partials/_alerts.html' %}
+
+  <!-- Job Application Table -->
+
+ <section id="dashboard" class="py-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+            <h2>Welcome {{ user.first_name }}!</h2>
+            <p style="padding-bottom:30px">Here are the job applications that you have applied</p>
+
+  <!-- Date Query -->
+  <section >
+      <table>
+          <div>
+              <th>
+                  <form action="{% url 'filterJobApplications' %}" method="POST">
+                    <t style="margin-left:26px">From: </t> <input style="margin-bottom:6px" size="12" type="text" name="start" id="datepicker" /> To: <input size="12" type="text" id="datepicker1" name="end"/>
+                    <script type="text/javascript">
+                      document.getElementById('datepicker').value = "";
+                      document.getElementById('datepicker1').value = "";
+                    </script>
+                    {% csrf_token %}
+                    <input type="submit" name="button" id="button" value="Query" />
+                  </form>
+              </th>
+              <th> </th>
+          </div>
+      </table>
+  </section>
+
+            {% if job_apps %}
+            <div align="left" id="mainWrapper">
+                <div id="pageContent">
+                    <div align="left" style="margin-left:24px">
+                        <div class="fw-body">
+                            <table id="example" class="table" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Logo</th>
+                                        <th scope="col">Company</th>
+                                        <th scope="col">Job Title</th>
+                                        <th scope="col">Application Date</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Source</th>
+                                        <th>
+                                            <div align="right" id="container" style="margin-right: 0px; padding-bottom:0px" class="">
+                                                <script>
+                                                    var mountNode = document.getElementById('container');
+                                                </script>
+                                                <script src='https://unpkg.com/react@16.x/umd/react.development.js'></script>
+                                                <script src='https://unpkg.com/react-dom@16.x/umd/react-dom.development.js'></script>
+                                                <script src='https://unpkg.com/moment/min/moment-with-locales.js'></script>
+                                                <script src="{% static 'js/antd-with-locales.js' %} "></script>
+                                                <script  src="{% static 'js/addnew.js' %} "></script>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for job_app in job_apps %}
+                                        <tr>
+                                            <form action="{% url 'updateJobApplication' %}" method="POST">
+                                                <td>{{ forloop.counter }}</td>
+                                                <td> <img src="{{ job_app.companyLogo }}"  style="width: 50px; height: 50px;"></td>
+                                                <td>{{ job_app.company }}</td>
+                                                <td>{{ job_app.jobTitle }}</td>
+                                                <td>{{ job_app.applyDate }}</td>
+                                                <td>
+                                                    <select name="ddStatus"  onchange="this.form.submit()">
+                                                        <option value="-1">---------</option>
+                                                        {% for status in statuses %}
+                                                            <option value="{{status.pk}}"
+                                                                {% if status == job_app.applicationStatus %}selected="selected"{% endif %}>
+                                                                {{status.value|capfirst}}
+                                                            </option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </td>
+                                                <td>{{ job_app.source }}</td>
+                                                {% csrf_token %}
+                                                <input type="hidden" name="pk" value="{{job_app.pk}}">
+                                            </form>    
+                                                <td>
+                                                    <form action="{% url 'deleteJobApplication' %}" method="POST">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="pk" value="{{job_app.pk}}">
+                                                        <input type="submit" value="-" style="margin-left: 15px; margin-top:10px">
+                                                    </form>    
+                                                </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          {% else %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+ </section>
+
+
+ <!-- Footer -->
+  {% include 'partials/_footer.html' %}
+</body>
+</html>
