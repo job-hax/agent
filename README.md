@@ -9,8 +9,8 @@ pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
 ```
 Create db user and database with owner privileges
 ```
-psql postgres -c 'CREATE USER errorcvuser WITH PASSWORD '123456';';
-psql postgres -c 'CREATE DATABASE errorcvdb WITH OWNER errorcvuser;";'
+psql postgres -c “CREATE USER errorcvuser WITH PASSWORD ‘123456’;”
+psql postgres -c “CREATE DATABASE errorcvdb WITH OWNER errorcvuser;”
 ```
 
 - Go to the [Google Google Developers](https://console.developers.google.com/apis/library?project=_) Console and create a project.
