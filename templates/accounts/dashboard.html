@@ -65,12 +65,12 @@
 
 
 <!-- Main Content -->
-  <section id="showcase-inner" class="py-5 text-white">
-    <div class="container">
+<section id="showcase-inner" >
+    <div class="container" style="background-color: rgb(80, 230, 100)">
       <div class="row text-center">
         <div class="col-md-12">
           <h1 class="py-3 text-white">User Dashboard</h1>
-          <p class="lead">Manage your Job Application State</p>
+          <p class="lead text-white">Manage your Job Application State</p>
         </div>
       </div>
     </div>
@@ -82,7 +82,7 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="{% url 'index' %}">
+            <a href="{% url 'index' %}" style="color: rgb(255, 0, 0)">
               <i class="fas fa-home"></i> Home</a>
           </li>
           <li class="breadcrumb-item active"> Dashboard</li>
@@ -139,8 +139,7 @@
                                         <th scope="col">Status</th>
                                         <th scope="col">Source</th>
                                         <th>
-                                            <div align="right" id="container" style="margin-right: 0px; padding-bottom:0px" class="">
-                                                <script>
+                                            <div id="container" style="margin-right: 12px; padding-bottom:0px" class="">                                                <script>
                                                     var mountNode = document.getElementById('container');
                                                 </script>
                                                 <script src='https://unpkg.com/react@16.x/umd/react.development.js'></script>
@@ -180,7 +179,7 @@
                                                     <form action="{% url 'deleteJobApplication' %}" method="POST">
                                                         {% csrf_token %}
                                                         <input type="hidden" name="pk" value="{{job_app.pk}}">
-                                                        <input type="submit" value="-" style="margin-left: 15px; margin-top:10px">
+                                                        <input type="submit" value="-" style="margin-left: 16px; margin-top:10px">
                                                     </form>    
                                                 </td>
                                         </tr>
