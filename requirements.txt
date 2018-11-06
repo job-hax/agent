@@ -10,3 +10,4 @@ python-dateutil==2.7.5
 httplib2
 oauth2client
 django-background-tasks==1.2.0
+beautifulsoup4==4.6.3
