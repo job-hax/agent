@@ -14,12 +14,13 @@ from .social_auth_credentials import Credentials
 from social_django.utils import load_strategy
 
 from .models import JobApplication
+from .models import JobPostDetail
 import base64
 import time
 from .gmail_utils import convertTime
 from .gmail_utils import removeHtmlTags
 from .gmail_utils import find_nth
-
+from .linkedin_utils import parse_job_detail
 
 def get_email_detail(service, user_id, msg_id, user, source):
   """Get a Message with given ID.
@@ -58,6 +59,7 @@ def get_email_detail(service, user_id, msg_id, user, source):
                 #get mail's body as a string
                 body = str(base64.urlsafe_b64decode(part['body']['data'].encode('ASCII')))
                 if(source == 'LinkedIn'):
+                    posterInformationJSON, decoratedJobPostingJSON, topCardV2JSON = parse_job_detail(body)
                     s = find_nth(body, 'https://media.licdn.com', 2)
                     if(s != -1):
                         e = find_nth(body, '" alt="' + company + '"', 1)
@@ -85,6 +87,9 @@ def get_email_detail(service, user_id, msg_id, user, source):
       if not inserted_before and jobTitle != '' and company != '':
         japp = JobApplication(jobTitle=jobTitle, company=company, applyDate=date, msgId=msg_id, source = source, user = user, companyLogo = image_url)
         japp.save()
+        if(source == 'LinkedIn'):
+            japp_details = JobPostDetail(job_post = japp, posterInformation = posterInformationJSON, decoratedJobPosting = decoratedJobPostingJSON, topCardV2 = topCardV2JSON)
+            japp_details.save()
   except errors.HttpError as error:
     print('An error occurred: %s' % error)
 
