@@ -5,12 +5,12 @@
 {% block title %} | About Us {% endblock %}
 
 {% block content %}
-<section id="showcase-inner" class="py-5 text-white">
-    <div class="container">
+<section id="showcase-inner">
+  <div class="container" style="background-color: rgb(80, 230, 100)">
       <div class="row text-center">
         <div class="col-md-12">
           <h1 class="display-4 text-white">About ERRORCV</h1>
-          <p class="lead">Shame failure, build future now!</p>
+          <p class="lead text-white">Shame failure, build future now!</p>
         </div>
       </div>
     </div>
@@ -22,7 +22,7 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="{% url 'index' %}">
+            <a href="{% url 'index' %}" style="color: rgb(255, 0, 0)">
               <i class="fas fa-home"></i> Home</a>
           </li>
           <li class="breadcrumb-item active"> About</li>
@@ -37,7 +37,9 @@
         <div class="col-md-8">
           <h2>We Search For The Perfect Job for you</h2>
           <p class="lead">Start here</p>
-          <img src="{% static 'img/about.jpg' %}" alt="">
+          <object style="object-fit: scale-down">
+              <img src="{% static 'img/about resized.jpg' %}" >
+          </object>
           <p class="mt-4">Move forward bit by bit</p>
         </div>
       </div>
@@ -45,11 +47,13 @@
   </section>
 
   <!-- Work -->
-  <section id="work" class="bg-dark text-white text-center">
-    <h2 class="display-4">We Work For You</h2>
-    <h4>Face failures, learn from failures and make success!</h4>
-    <hr>
-    <a href="#" class="btn btn-secondary text-white btn-lg">View Our Featured Jobs</a>
+  <section id="work" class="text-white text-center">
+    <div class="container" style="background-color: rgb(80, 230, 100)">
+      <h2 class="display-4 text-white">We Work For You</h2>
+      <h4 class="text-white">Face failures, learn from failures and make success!</h4>
+      <hr>
+      <a href="#" class="btn btn-secondary text-white btn-lg">View Our Featured Jobs</a>
+  </div>
   </section>
 
   <!-- Team -->
