@@ -94,6 +94,12 @@ def scheduleFetcher(user_id):
     if user.social_auth.filter(provider='google-oauth2'):
         fetchJobApplications(user)
 
+from django.core import serializers
+def getStatuses(request):
+  statuses = ApplicationStatus.objects.all()
+  data = serializers.serialize("json", statuses)  
+  return JsonResponse(data)
+
 def dashboard(request):
   user_job_apps = JobApplication.objects.filter(user_id=request.user.id).order_by('-applyDate')
   statuses = ApplicationStatus.objects.all()
