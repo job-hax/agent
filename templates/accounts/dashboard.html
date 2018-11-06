@@ -160,7 +160,7 @@
                                                         <td style="padding-top: 25px"> {{ forloop.counter }}</td>
                                                         <td > <img src="{{ job_app.companyLogo }}"  style="width: 50px; height: 50px;"></td>
                                                         <td style="padding-top: 25px">{{ job_app.company }}</td>
-                                                        <td style="padding-top: 25px" href="{% url 'jobdetails' %}">{{ job_app.jobTitle }}</td>
+                                                        <td style="padding-top: 25px">{{ job_app.jobTitle }}</td>
                                                         <td style="padding-top: 25px">{{ job_app.applyDate }}</td>
                                                         <td style="padding-top: 25px">
                                                             <select name="ddStatus"  onchange="this.form.submit()">
@@ -177,11 +177,13 @@
                                                         {% csrf_token %}
                                                         <input type="hidden" name="pk" value="{{job_app.pk}}"> 
                                                     </form>
+                                                    <form method="link" action="{% url 'jobdetails' %}">
                                                         <td style="padding-top: 25px">
-                                                            <button class="ant-btn-sm ant-btn-primary" style="margin-left: 16px" >
-                                                                <a href="{% url 'jobdetails' %}">...</a>
-                                                            </button>
+                                                                <button class="ant-btn-sm ant-btn-primary" style="margin-left: 16px" >
+                                                                    ...
+                                                                </button>
                                                         </td>
+                                                    </form>
                                                         <td style="padding-top: 25px">
                                                             <form action="{% url 'deleteJobApplication' %}" method="POST">
                                                                 {% csrf_token %}
