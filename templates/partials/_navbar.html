@@ -34,6 +34,16 @@
 					<li class="nav-item submenu dropdown">
 						<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color:rgb(220, 220, 220)">{{ user.first_name }}'s ErrorCV</a>
 						<ul class="dropdown-menu">
+								<li 
+								{% if 'profile' in request.path %}
+									class="nav-item"
+								{% else %}
+									class="nav-item"
+								{% endif %}
+								>
+								<a class="nav-link" href="{% url 'profile' %}">
+									Profile</a>
+							</li>
 							<li 
 								{% if 'dashboard' in request.path %}
 									class="nav-item"
@@ -53,6 +63,16 @@
 								>
 								<a class="nav-link" href="{% url 'metrics' %}">
 									Metrics</a>
+							</li>
+							<li 
+								{% if 'settings' in request.path %}
+									class="nav-item"
+								{% else %}
+									class="nav-item"
+								{% endif %}
+								>
+								<a class="nav-link" href="{% url 'settings' %}">
+									Settings</a>
 							</li>
 						</ul>					
 					<li class="nav-item">

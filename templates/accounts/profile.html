@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %} | Profile {% endblock %}
+
+{% block content %}
+<!-- Main Content -->
+  <section id="showcase-inner">
+    <div class="container" style="background-color: rgb(80, 230, 100)">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="py-3 text-white">Your Profile</h1>
+          <p class="lead text-white">Keep Your Profile Updated for Best Opportunuties</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- Breadcrumb -->
+  <section id="bc" class="mt-3">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'index' %}" style="color: rgb(255, 0, 0)">
+              <i class="fas fa-home"></i> Home</a>
+          </li>
+          <li class="breadcrumb-item active"> Profile</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Alerts -->
+  {% include 'partials/_alerts.html' %}
+
+  <!-- Metrics Introduction-->
+
+ <section id="metrics" class="py-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+            <h2>{{ user.first_name }}'s Profile</h2>
+            <p style="padding-bottom:30px">You can update your profile information here</p>
+        </div>
+      </div>
+    </div>
+ </section>
+
+  {% endblock %}

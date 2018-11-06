@@ -371,13 +371,13 @@ button:focus {
 .home_banner_area {
   z-index: 1;
   background: url(../img/banner/home-banner.jpg) no-repeat scroll center center;
-  background-size: cover;
+  background-size: 1164px;
 }
 
 .home_banner_area .banner_inner {
   overflow: hidden;
   width: 100%;
-  padding: 170px 0px 140px 0px;
+  padding: 140px 0px 140px 80px;
 }
 
 .home_banner_area .banner_inner .banner_content {

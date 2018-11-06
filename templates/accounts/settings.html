@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %} | Metrics {% endblock %}
+{% block title %} | Account Settings {% endblock %}
 
 {% block content %}
 <!-- Main Content -->
@@ -8,8 +8,8 @@
     <div class="container" style="background-color: rgb(80, 230, 100)">
       <div class="row text-center">
         <div class="col-md-12">
-          <h1 class="py-3 text-white">User Metrics</h1>
-          <p class="lead text-white">Track Your Job Application Statistics</p>
+          <h1 class="py-3 text-white">Account Settings</h1>
+          <p class="lead text-white">Configure Your Account</p>
         </div>
       </div>
     </div>
@@ -24,7 +24,7 @@
             <a href="{% url 'index' %}" style="color: rgb(255, 0, 0)">
               <i class="fas fa-home"></i> Home</a>
           </li>
-          <li class="breadcrumb-item active"> Metrics</li>
+          <li class="breadcrumb-item active"> Settings</li>
         </ol>
       </nav>
     </div>
@@ -40,7 +40,7 @@
       <div class="row">
         <div class="col-md-12">
             <h2>Welcome {{ user.first_name }}!</h2>
-            <p style="padding-bottom:30px">Here are your job applications statistics</p>
+            <p style="padding-bottom:30px">Here are your settings</p>
         </div>
       </div>
     </div>
@@ -51,23 +51,12 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-            <h4>You have applied 28 jobs so far!</h4>
-            <p style="padding-bottom:20px">That means you have already taken 28 steps towards your perfect job!</p>
+            <h4>User Information</h4>
+            <p style="padding-bottom:20px">Change your information</p>
         </div>
       </div>
     </div>
  </section>
 
-  <!-- Metric2: Amounth of Job Applications per Month-->
- <section id="metric2" class="py-0">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-            <h4>Monthly application chart</h4>
-            <p style="padding-bottom:20px">You can easily track how many applications you have made each month</p>
-        </div>
-      </div>
-    </div>
- </section>
 
   {% endblock %}
