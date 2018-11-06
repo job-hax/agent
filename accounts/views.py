@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from .models import JobApplication
 from .models import ApplicationStatus
 from .gmail_lookup import fetchJobApplications
+from .linkedin_lookup import get_profile
 from django.http import HttpResponseRedirect
 from background_task import background
 
@@ -121,6 +122,9 @@ def dashboard(request):
   #https://stackoverflow.com/questions/41205607/how-to-activate-the-process-queue-in-django-background-tasks
   #scheduleFetcher.now(request.user.id)
   scheduleFetcher(request.user.id)
+
+  if request.user.social_auth.filter(provider='linkedin-oauth2'):
+        get_profile(request.user)
 
   context = {
     'job_apps': user_job_apps,

@@ -7,6 +7,7 @@ from django.dispatch import receiver
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     gmail_last_update_time = models.IntegerField(default=0)
+    linkedin_info = models.TextField(null=True, blank=True)
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
