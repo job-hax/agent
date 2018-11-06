@@ -30,31 +30,45 @@ c) Under the APIs and services tab, search for Google+ API and Gmail API and ena
 
 5. Set SOCIAL_AUTH_GOOGLE_OAUTH2_KEY and SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET environment variables:
 ```
-export SOCIAL_AUTH_GOOGLE_OAUTH2_KEY =''  #Paste CLient Key
-export SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '' #Paste Secret Key
+export SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=''  #Paste CLient Key
+export SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET= '' #Paste Secret Key
 ```
-6. Install python dependencies for application:
+
+6. In [LinkedIn Developer Network](https://www.linkedin.com/secure/developer) create a project ([Instructions in STEP 1](https://developer.linkedin.com/docs/oauth2#)):
+
+a) Enter the following URI in Authorized redirect URIs list: 
+```
+http://127.0.0.1:8000/accounts/complete/linkedin-oauth2/
+```
+
+7. Set SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY and SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET environment variables:
+```
+export SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY=''  #Paste CLient Key
+export SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET= '' #Paste Secret Key
+```
+
+8. Install python dependencies for application:
 ```
 pip3 install -r requirements.txt
 ```
 
-7. Migrate application data changes to postgres:
+9. Migrate application data changes to postgres:
 ```
 python3 manage.py makemigrations accounts
 python3 manage.py makemigrations
 python3 manage.py migrate
 ```
 
-8. Create superuser for admin panel:
+10. Create superuser for admin panel:
 ```
 python3 manage.py createsuperuser
 ```
 
-9. Start Django server:
+11. Start Django server:
 ```
 python3 manage.py runserver
 ```
-10. In another terminal run:
+12. In another terminal run:
 ```
 python3 manage.py process_tasks
 ```
