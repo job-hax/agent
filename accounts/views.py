@@ -170,3 +170,20 @@ def metrics(request):
   }
   return render(request, 'accounts/metrics.html', context)
 
+def profile(request):
+  context = {
+
+  }
+  return render(request, 'accounts/profile.html', context)
+
+def settings(request):
+  context = {
+
+  }
+  return render(request, 'accounts/settings.html', context)
+
+def jobdetails(request):
+  context = {
+
+  }
+  return render(request, 'accounts/jobdetails.html', context)
