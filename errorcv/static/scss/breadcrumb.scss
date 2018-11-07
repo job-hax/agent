@@ -3,11 +3,11 @@
 .home_banner_area{
 	z-index: 1;
 	background: url(../img/banner/home-banner.jpg) no-repeat scroll center center;
-	background-size: cover;
+	background-size: 1164px;
 	.banner_inner{
 		overflow: hidden;
 		width: 100%;
-		padding: 170px 0px 140px 0px;
+		padding: 140px 0px 140px 80px;
 		.banner_content{
 			color: #fff;
 			.col-lg-9{
@@ -31,6 +31,7 @@
 			}
 			.banner_map_img{
 				text-align: right;
+				margin-right: 100px;
 			}
 			.banner_btn{
 				

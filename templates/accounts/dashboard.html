@@ -67,7 +67,7 @@
         <div class="row text-center">
             <div class="col-md-12">
             <h1 class="py-3 text-white">User Dashboard</h1>
-            <p class="lead text-white">Manage your Job Application State</p>
+            <p class="lead text-white">Manage Your Job Application State</p>
             </div>
         </div>
         </div>
@@ -132,13 +132,14 @@
                                     <table id="example" class="table" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">Logo</th>
-                                                <th scope="col">Company</th>
-                                                <th scope="col">Job Title</th>
-                                                <th scope="col">Application Date</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">Source</th>
+                                                <th >#</th>
+                                                <th >Logo</th>
+                                                <th >Company</th>
+                                                <th >Job Title</th>
+                                                <th style="width:120px">Application Date</th>
+                                                <th >Status</th>
+                                                <th >Source</th>
+                                                <th >Details</th>
                                                 <th>
                                                     <div id="container" style="margin-right: 12px; padding-bottom:0px" class="">                                                <script>
                                                             var mountNode = document.getElementById('container');
@@ -152,16 +153,16 @@
                                                 </th>
                                             </tr>
                                         </thead>
-                                        <tbody> 
+                                        <tbody > 
                                             {% for job_app in job_apps %}
                                                 <tr>
                                                     <form action="{% url 'updateJobApplication' %}" method="POST">
-                                                        <td>{{ forloop.counter }}</td>
-                                                        <td> <img src="{{ job_app.companyLogo }}"  style="width: 50px; height: 50px;"></td>
-                                                        <td>{{ job_app.company }}</td>
-                                                        <td>{{ job_app.jobTitle }}</td>
-                                                        <td>{{ job_app.applyDate|date:'Y-m-d' }}</td>
-                                                        <td>
+                                                        <td style="padding-top: 25px"> {{ forloop.counter }}</td>
+                                                        <td > <img src="{{ job_app.companyLogo }}"  style="width: 50px; height: 50px;"></td>
+                                                        <td style="padding-top: 25px">{{ job_app.company }}</td>
+                                                        <td style="padding-top: 25px">{{ job_app.jobTitle }}</td>
+                                                        <td style="padding-top: 25px">{{ job_app.applyDate|date:'Y-m-d' }}</td>
+                                                        <td style="padding-top: 25px">
                                                             <select name="ddStatus"  onchange="this.form.submit()">
                                                                 <option value="-1">---------</option>
                                                                 {% for status in statuses %}
@@ -172,15 +173,22 @@
                                                                 {% endfor %}
                                                             </select>
                                                         </td>
-                                                        <td>{{ job_app.source }}</td>
+                                                        <td style="padding-top: 25px">{{ job_app.source }}</td>
                                                         {% csrf_token %}
                                                         <input type="hidden" name="pk" value="{{job_app.pk}}"> 
                                                     </form>
-                                                        <td>
+                                                    <form method="link" action="{% url 'jobdetails' %}">
+                                                        <td style="padding-top: 25px">
+                                                                <button class="ant-btn-sm ant-btn-primary" style="margin-left: 16px" >
+                                                                    ...
+                                                                </button>
+                                                        </td>
+                                                    </form>
+                                                        <td style="padding-top: 25px">
                                                             <form action="{% url 'deleteJobApplication' %}" method="POST">
                                                                 {% csrf_token %}
                                                                 <input type="hidden" name="pk" value="{{job_app.pk}}">
-                                                                <input type="submit" value="-" style="margin-left: 16px; margin-top:10px">
+                                                                <input class="ant-btn-sm ant-btn-danger active" type="submit" value="-" style="margin-left: 16px; height: 25px">
                                                             </form>    
                                                         </td>
                                                 </tr>
