@@ -36,7 +36,7 @@ class JobApplication(models.Model):
     return self.jobTitle + '@' + self.company
 
 class JobPostDetail(models.Model):
-  job_post = models.ForeignKey(JobApplication, on_delete=models.DO_NOTHING, null=True, blank=True) 
+  job_post = models.ForeignKey(JobApplication, on_delete=models.CASCADE, null=True, blank=True) 
   posterInformation = models.TextField(null=True, blank=True)
   decoratedJobPosting = models.TextField(null=True, blank=True)
   topCardV2 = models.TextField(null=True, blank=True)
