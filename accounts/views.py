@@ -174,6 +174,12 @@ def metrics(request):
   }
   return render(request, 'accounts/metrics.html', context)
 
+def job_board(request):
+  context = {
+
+  }
+  return render(request, 'accounts/job_board.html', context)
+
 def profile(request):
   context = {
 

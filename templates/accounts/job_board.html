@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %} | Job Board {% endblock %}
+
+{% block content %}
+<!-- Main Content -->
+  <section id="showcase-inner">
+    <div class="container" style="background-color: rgb(80, 230, 100)">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="py-3 text-white">Job Board</h1>
+          <p class="lead text-white">Track Your Job Application</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- Breadcrumb -->
+  <section id="bc" class="mt-3">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'index' %}" style="color: rgb(255, 0, 0)">
+              <i class="fas fa-home"></i> Home</a>
+          </li>
+          <li class="breadcrumb-item active"> Metrics</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Alerts -->
+  {% include 'partials/_alerts.html' %}
+
+  <!-- Job Board Introduction-->
+  <section class="py-0" style="margin: auto; display: table;">
+  <div class="board">
+    <div class="container-fluid">
+        <div class="d-flex flex-nowrap flex-row">
+            <div class="card">
+                <div class="card-header" style="background:#b29d4c">
+                    <h5 class="card-title">Pending</h5>
+                </div>
+
+                <div class="card-body">
+                    <ul class="board-column" data-name="pending">
+                        <li class="board-item" data-id="2peveobn"></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" style="background:#4c7ab2">
+                    <h5 class="card-title">In Progress</h5>
+                </div>
+
+                <div class="card-body">
+                    <ul class="board-column" data-name="in-progress">
+                        <li class="board-item" data-id="e7jm9bdo"></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" style="background:#4cb24d">
+                    <h5 class="card-title">Completed</h5>
+                </div>
+
+                <div class="card-body">
+                    <ul class="board-column" data-name="completed">
+                        <li class="board-item" data-id="kn44jpag"></li>
+                    </ul>
+                </div>
+            </div>
+           
+           <div class="card">
+                <div class="card-header" style="background:#ad3434">
+                    <h5 class="card-title">Cancelled</h5>
+                </div>
+
+                <div class="card-body">
+                    <ul class="board-column" data-name="cancelled">
+                        <li class="board-item" data-id="v5svplnw"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+  {% endblock %}
