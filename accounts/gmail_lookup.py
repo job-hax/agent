@@ -38,7 +38,6 @@ def get_email_detail(service, user_id, msg_id, user, source):
     message = service.users().messages().get(userId=user_id, id=msg_id, format='full').execute()
     jobTitle = ''
     company = ''
-    date = ''
     image_url = ''
     for header in message['payload']['headers']:
         if header['name'] == 'Subject':

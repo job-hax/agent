@@ -28,7 +28,8 @@ def convertTime(base):
 
     # Convert time zone
     central = utc.astimezone(to_zone)
-    return central.strftime('%Y-%m-%d')
+    return central
+    #return central.strftime('%Y-%m-%d')
     #return central.strftime('%a, %d %b %Y %H:%M:%S %z')
 
 def find_nth(string, substring, n):
