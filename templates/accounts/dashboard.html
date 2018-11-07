@@ -160,7 +160,7 @@
                                                         <td> <img src="{{ job_app.companyLogo }}"  style="width: 50px; height: 50px;"></td>
                                                         <td>{{ job_app.company }}</td>
                                                         <td>{{ job_app.jobTitle }}</td>
-                                                        <td>{{ job_app.applyDate }}</td>
+                                                        <td>{{ job_app.applyDate|date:'Y-m-d' }}</td>
                                                         <td>
                                                             <select name="ddStatus"  onchange="this.form.submit()">
                                                                 <option value="-1">---------</option>

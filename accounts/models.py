@@ -29,7 +29,7 @@ class JobApplication(models.Model):
   jobTitle = models.CharField(max_length=200)
   company = models.CharField(max_length=200)
   companyLogo = models.CharField(max_length=200, null=True, blank=True)
-  applyDate = models.CharField(max_length=200)
+  applyDate = models.DateTimeField(blank=True)
   msgId = models.CharField(max_length=200)
   source = models.CharField(max_length=200, default='')
   def __str__(self):
