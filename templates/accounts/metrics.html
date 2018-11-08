@@ -4,6 +4,7 @@
 
 {% block content %}
 {% load static %}
+<script src="{% static 'js/echarts.min.js' %} "></script>
 <!-- Main Content -->
 <section id="showcase-inner">
   <div class="container" style="background-color: rgb(80, 230, 100)">
@@ -73,22 +74,28 @@
   </div>
 </section>
 
-<!-- Graph Selector-->
+<!-- Graph Selector
 <section id="graphselectorsec">
   <div class="container">
     <div class="row">
       <div class="col-md-12" style="margin-left:800px">
         <form>
-          <select name="graphselector" id="selector1"  onchange="change()">
-            <option value="0" selected="selected">Monthly Application Chart</option>
-            <option value="1">Stages Chart</option>
-            <option value="2">Positions by Stages Chart</option>
+          <select name="graphselector" id="selector1" onchange="window.location.href=this.value;">
+            <option selected="selected" value="0">
+                Monthly Application Chart
+            </option>
+            <option value="1">
+                Stages Chart
+            </option>
+            <option value="#metric4">
+              Positions by Stages Chart
+            </option>
           </select>
         </form>
       </div>
     </div>
   </div>
-</section>
+</section>-->
 
 
 <!-- MainMetric2: Amounth of Job Applications per Month-->
@@ -137,9 +144,8 @@
   </div>
 </section>
 
-<!-- Graph Selector Script-->
+<!-- Graph Selector Script
 <script>
-  change();
   function change() {
     var e = document.getElementById("selector1");
     var selectedIndex = e.selectedIndex;
@@ -163,7 +169,7 @@
       graph3.style.display = "block";
     }
   }
-</script>
+</script>-->
 
 <!-- Bottom Padding-->
 <section >
