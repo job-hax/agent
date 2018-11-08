@@ -7,6 +7,7 @@ from .gmail_lookup import fetchJobApplications
 from .linkedin_lookup import get_profile
 from django.http import HttpResponseRedirect
 from background_task import background
+from django.db.models import Q
 
 def register(request):
   if request.method == 'POST':
@@ -197,3 +198,25 @@ def jobdetails(request):
 
   }
   return render(request, 'accounts/jobdetails.html', context)
+
+def get_total_application_count(request):
+  count = JobApplication.objects.filter(user_id=request.user.id).count()
+  return JsonResponse({'count':count})
+
+from django.db.models import Count
+def get_application_count_by_month(request):
+  response = []
+  sources = ['LinkedIn','Hired.com','Indeed', 'Others']
+  for i in sources:
+    if i != 'Others':
+      appsByMonths = JobApplication.objects.filter(source=i,applyDate__year='2018').values('applyDate__year', 'applyDate__month').annotate(count=Count('pk'))
+    else:  
+      appsByMonths = JobApplication.objects.filter(~Q(source = 'LinkedIn'),~Q(source = 'Hired.com'),~Q(source = 'Indeed'),applyDate__year='2018').values('applyDate__year', 'applyDate__month').annotate(count=Count('pk'))
+    item = {}
+    item['source'] = i
+    data = [0] * 12
+    for app in appsByMonths:
+      data[app['applyDate__month'] - 1] = app['count']
+    item['data'] = data  
+    response.append(item)
+  return JsonResponse(response, safe=False)
