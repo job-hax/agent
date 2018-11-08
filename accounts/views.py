@@ -3,11 +3,14 @@ from django.contrib import messages, auth
 from django.contrib.auth.models import User
 from .models import JobApplication
 from .models import ApplicationStatus
+from .models import Profile
 from .gmail_lookup import fetchJobApplications
 from .linkedin_lookup import get_profile
 from django.http import HttpResponseRedirect
 from background_task import background
 from django.db.models import Q
+import datetime
+from dateutil import tz
 
 def register(request):
   if request.method == 'POST':
@@ -127,8 +130,14 @@ def dashboard(request):
   if request.user.social_auth.filter(provider='linkedin-oauth2'):
         get_profile(request.user)
 
+  profile = Profile.objects.get(user_id= request.user.id)
+  if(profile.gmail_last_update_time == 0):
+    last_sync_time = "Syncing..."
+  else:
+    last_sync_time = datetime.datetime.utcfromtimestamp(profile.gmail_last_update_time)
   context = {
     'job_apps': user_job_apps,
+    'last_sync_time': last_sync_time,
     'statuses': statuses
   }
   return render(request, 'accounts/dashboard.html', context)
@@ -161,8 +170,14 @@ def filterJobApplications(request):
       query = query.filter(applyDate__lte=end)
     user_job_apps = query.order_by('-applyDate')
     statuses = ApplicationStatus.objects.all()
+    profile = Profile.objects.get(user_id = request.user.id)
+    if(profile.gmail_last_update_time == 0):
+      last_sync_time = "Syncing..."
+    else:
+      last_sync_time = datetime.datetime.fromtimestamp(profile.gmail_last_update_time)
     context = {
       'job_apps': user_job_apps,
+      'last_sync_time': last_sync_time,
       'statuses': statuses
     }
     return render(request, 'accounts/dashboard.html', context)
@@ -206,12 +221,12 @@ def get_total_application_count(request):
 from django.db.models import Count
 def get_application_count_by_month(request):
   response = []
-  sources = ['LinkedIn','Hired.com','Indeed', 'Others']
+  sources = ['Hired.com','LinkedIn','Indeed', 'Others']
   for i in sources:
     if i != 'Others':
-      appsByMonths = JobApplication.objects.filter(source=i,applyDate__year='2018').values('applyDate__year', 'applyDate__month').annotate(count=Count('pk'))
+      appsByMonths = JobApplication.objects.filter(user_id=request.user.id,source=i,applyDate__year='2018').values('applyDate__year', 'applyDate__month').annotate(count=Count('pk'))
     else:  
-      appsByMonths = JobApplication.objects.filter(~Q(source = 'LinkedIn'),~Q(source = 'Hired.com'),~Q(source = 'Indeed'),applyDate__year='2018').values('applyDate__year', 'applyDate__month').annotate(count=Count('pk'))
+      appsByMonths = JobApplication.objects.filter(~Q(source = 'LinkedIn'),~Q(source = 'Hired.com'),~Q(source = 'Indeed'),user_id=request.user.id,applyDate__year='2018').values('applyDate__year', 'applyDate__month').annotate(count=Count('pk'))
     item = {}
     item['source'] = i
     data = [0] * 12
