@@ -245,3 +245,26 @@ def get_count_by_statuses(request):
     item['value'] = i['count']
     response.append(item)
   return JsonResponse(response, safe=False)
+
+def get_count_by_jobtitle_and_statuses(request):
+  response = {}
+  job_titles = JobApplication.objects.filter(~Q(applicationStatus = None),user_id=request.user.id).values('jobTitle').annotate(count=Count('pk'))
+  jobs = []
+  statuses_data = []
+  status_data = []
+  for job_title in job_titles:
+    jobs.append(job_title['jobTitle'])
+  response['jobs'] = jobs
+  statuses = ApplicationStatus.objects.all()
+  for status in statuses:
+    statuses_data.append(status.value)
+    item = {}
+    item['name'] = status.value
+    data = [0] * len(job_titles)
+    for i,job_title in enumerate(job_titles):
+      data[i] = JobApplication.objects.filter(user_id=request.user.id, jobTitle=job_title['jobTitle'], applicationStatus=status).count()
+    item['data'] = data
+    status_data.append(item)
+  response['statuses'] = statuses_data  
+  response['data'] = status_data  
+  return JsonResponse(response, safe=False)
