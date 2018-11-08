@@ -3,71 +3,175 @@
 {% block title %} | Metrics {% endblock %}
 
 {% block content %}
+{% load static %}
 <!-- Main Content -->
-  <section id="showcase-inner">
-    <div class="container" style="background-color: rgb(80, 230, 100)">
-      <div class="row text-center">
-        <div class="col-md-12">
-          <h1 class="py-3 text-white">User Metrics</h1>
-          <p class="lead text-white">Track Your Job Application Statistics</p>
-        </div>
+<section id="showcase-inner">
+  <div class="container" style="background-color: rgb(80, 230, 100)">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h1 class="py-3 text-white">User Metrics</h1>
+        <p class="lead text-white">Track Your Job Application Statistics</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-    <!-- Breadcrumb -->
-  <section id="bc" class="mt-3">
-    <div class="container">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="{% url 'index' %}" style="color: rgb(255, 0, 0)">
-              <i class="fas fa-home"></i> Home</a>
-          </li>
-          <li class="breadcrumb-item active"> Metrics</li>
-        </ol>
-      </nav>
-    </div>
-  </section>
+  <!-- Breadcrumb -->
+<section id="bc" class="mt-3">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'index' %}" style="color: rgb(255, 0, 0)">
+            <i class="fas fa-home"></i> Home</a>
+        </li>
+        <li class="breadcrumb-item active"> Metrics</li>
+      </ol>
+    </nav>
+  </div>
+</section>
 
-  <!-- Alerts -->
-  {% include 'partials/_alerts.html' %}
+<!-- Alerts -->
+{% include 'partials/_alerts.html' %}
 
-  <!-- Metrics Introduction-->
+<!-- Metrics Introduction-->
 
- <section id="metrics" class="py-0">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-            <h2>Welcome {{ user.first_name }}!</h2>
-            <p style="padding-bottom:30px">Here are your job applications statistics</p>
-        </div>
+<section id="metrics" class="py-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+          <h2>Welcome {{ user.first_name }}!</h2>
+          <p style="padding-bottom:30px">Here are your job applications statistics</p>
       </div>
     </div>
- </section>
+  </div>
+</section>
 
-  <!-- Metric1: Total Amount of Job Applications -->
- <section id="metric1" class="py-0">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-            <h4>You have applied 28 jobs so far!</h4>
-            <p style="padding-bottom:20px">That means you have already taken 28 steps towards your perfect job!</p>
-        </div>
+<!-- MainMetric1: Total Amount of Job Applications -->
+<section id="mainmetric1" class="py-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+          <h4 id="count_title"></h4>
+          <p id = "count_desc" ></p>
+          <script>
+            fetch('get_jobapplication_count', {
+              method: 'GET'
+            })
+            .then(function(response) {
+              return response.json();
+            })
+            .then(function(jsonResponse) {
+              console.log(JSON.stringify(jsonResponse));
+              var count = jsonResponse.count;
+              document.getElementById('count_title').innerHTML = "You have applied " + count + " jobs so far!";
+              document.getElementById('count_desc').innerHTML = "That means you have already taken " + count + " steps towards your perfect job!";
+            });
+          </script>
       </div>
     </div>
- </section>
+  </div>
+</section>
 
-  <!-- Metric2: Amounth of Job Applications per Month-->
- <section id="metric2" class="py-0">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-            <h4>Monthly application chart</h4>
-            <p style="padding-bottom:20px">You can easily track how many applications you have made each month</p>
-        </div>
+<!-- Graph Selector-->
+<section id="graphselectorsec">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12" style="margin-left:800px">
+        <form>
+          <select name="graphselector" id="selector1"  onchange="change()">
+            <option value="0" selected="selected">Monthly Application Chart</option>
+            <option value="1">Stages Chart</option>
+            <option value="2">Positions by Stages Chart</option>
+          </select>
+        </form>
       </div>
     </div>
- </section>
+  </div>
+</section>
 
-  {% endblock %}
+
+<!-- MainMetric2: Amounth of Job Applications per Month-->
+<section id="mainmetric2" class="py-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12" style="padding-left:50px">
+          <h4>Monthly application chart of 2018</h4>
+          <p style="padding-bottom:20px">You can easily track how many applications you have made each month</p>
+          <div>
+            {% include 'accounts/metrics/monthly.html' %}
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Metric3: Amounth of Stages of the Job Applications-->
+<section id="metric3" >
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12" style="padding-left:50px">
+          <h4>Application stages chart of 2018</h4>
+          <p style="padding-bottom:20px">You can easily track how many of your applications at which stage</p>
+          <div>
+            {% include 'accounts/metrics/status.html' %}
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Metric4: Stages Stacked in Positions-->
+<section id="metric4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12" style="padding-left:50px">
+          <h4>Applications Stages in Positions</h4>
+          <p style="padding-bottom:20px">You can easily track how many of your applications for each position at which stage</p>
+          <div>
+            {% include 'accounts/metrics/positionbystages.html' %}
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Graph Selector Script-->
+<script>
+  change();
+  function change() {
+    var e = document.getElementById("selector1");
+    var selectedIndex = e.selectedIndex;
+    console.log(selectedIndex);
+
+    var graph1 = document.getElementById("mainmetric2");
+    var graph2 = document.getElementById("metric3");
+    var graph3 = document.getElementById("metric4");
+
+    if(selectedIndex == 0){
+      graph1.style.display = "block";
+      graph2.style.display = "none";
+      graph3.style.display = "none";
+    } else if(selectedIndex == 1){
+      graph1.style.display = "none";
+      graph2.style.display = "block";
+      graph3.style.display = "none";
+    } else {
+      graph1.style.display = "none";
+      graph2.style.display = "none";
+      graph3.style.display = "block";
+    }
+  }
+</script>
+
+<!-- Bottom Padding-->
+<section >
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12" style="padding-top:100px">
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
