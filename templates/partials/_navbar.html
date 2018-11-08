@@ -65,6 +65,16 @@
 									Metrics</a>
 							</li>
 							<li 
+								{% if 'job_board' in request.path %}
+									class="nav-item"
+								{% else %}
+									class="nav-item"
+								{% endif %}
+								>
+								<a class="nav-link" href="{% url 'job_board' %}">
+									Job Board</a>
+							</li>							
+							<li 
 								{% if 'settings' in request.path %}
 									class="nav-item"
 								{% else %}

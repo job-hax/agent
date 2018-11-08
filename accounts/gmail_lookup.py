@@ -6,6 +6,7 @@ from googleapiclient import errors
 from .models import Profile
 import string
 from datetime import datetime
+import requests
 
 from requests import exceptions as requests_errors
 
@@ -37,7 +38,6 @@ def get_email_detail(service, user_id, msg_id, user, source):
     message = service.users().messages().get(userId=user_id, id=msg_id, format='full').execute()
     jobTitle = ''
     company = ''
-    date = ''
     image_url = ''
     for header in message['payload']['headers']:
         if header['name'] == 'Subject':
@@ -64,6 +64,9 @@ def get_email_detail(service, user_id, msg_id, user, source):
                     if(s != -1):
                         e = find_nth(body, '" alt="' + company + '"', 1)
                         image_url = body[s : e].replace('&amp;', '&')
+                        image_exists=requests.get(image_url)
+                        if(image_exists.status_code == 404):
+                            image_url = custom_image_url 
                     else:
                         image_url = custom_image_url
                     if len(image_url) > 300:

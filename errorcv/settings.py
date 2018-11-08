@@ -158,6 +158,7 @@ SOCIAL_AUTH_PIPELINE = (
 
     # Create the record that associates the social account with the user.
     'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.associate_by_email',  # <--- enable this one
 
     # Populate the extra_data field in the social record with the values
     # specified by settings (and the default ones like access_token, etc).
@@ -170,7 +171,7 @@ SOCIAL_AUTH_PIPELINE = (
 SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = os.environ['SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY']
 SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = os.environ['SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET']
 # Add email to requested authorizations.
-SOCIAL_AUTH_LINKEDIN_OAUTH2__SCOPE = ['r_basicprofile', 'r_emailaddress', ...]
+SOCIAL_AUTH_LINKEDIN_OAUTH2__SCOPE = ['r_fullprofile', 'r_emailaddress', 'r_network']
 # Add the fields so they will be requested from linkedin.
 SOCIAL_AUTH_LINKEDIN_OAUTH2__FIELD_SELECTORS = ['email-address', 'headline', 'industry']
 # Arrange to add the fields to UserSocialAuth.extra_data

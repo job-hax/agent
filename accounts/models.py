@@ -7,6 +7,7 @@ from django.dispatch import receiver
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     gmail_last_update_time = models.IntegerField(default=0)
+    linkedin_info = models.TextField(null=True, blank=True)
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
@@ -28,14 +29,14 @@ class JobApplication(models.Model):
   jobTitle = models.CharField(max_length=200)
   company = models.CharField(max_length=200)
   companyLogo = models.CharField(max_length=200, null=True, blank=True)
-  applyDate = models.CharField(max_length=200)
+  applyDate = models.DateTimeField(blank=True)
   msgId = models.CharField(max_length=200)
   source = models.CharField(max_length=200, default='')
   def __str__(self):
     return self.jobTitle + '@' + self.company
 
 class JobPostDetail(models.Model):
-  job_post = models.ForeignKey(JobApplication, on_delete=models.DO_NOTHING, null=True, blank=True) 
+  job_post = models.ForeignKey(JobApplication, on_delete=models.CASCADE, null=True, blank=True) 
   posterInformation = models.TextField(null=True, blank=True)
   decoratedJobPosting = models.TextField(null=True, blank=True)
   topCardV2 = models.TextField(null=True, blank=True)
