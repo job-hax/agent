@@ -11,6 +11,10 @@ from background_task import background
 from django.db.models import Q
 import datetime
 from dateutil import tz
+from django.db.models import Count
+from django.core import serializers
+import json
+from django.http import JsonResponse
 
 def register(request):
   if request.method == 'POST':
@@ -99,7 +103,6 @@ def scheduleFetcher(user_id):
     if user.social_auth.filter(provider='google-oauth2'):
         fetchJobApplications(user)
 
-from django.core import serializers
 def getStatuses(request):
   statuses = ApplicationStatus.objects.all()
   data = serializers.serialize("json", statuses)  
@@ -142,8 +145,6 @@ def dashboard(request):
   }
   return render(request, 'accounts/dashboard.html', context)
 
-import json
-from django.http import JsonResponse
 def addJobApplication(request):
  if request.method == 'POST':
    body = json.loads(request.body)
@@ -218,7 +219,6 @@ def get_total_application_count(request):
   count = JobApplication.objects.filter(user_id=request.user.id).count()
   return JsonResponse({'count':count})
 
-from django.db.models import Count
 def get_application_count_by_month(request):
   response = []
   sources = ['Hired.com','LinkedIn','Indeed', 'Others']
@@ -233,5 +233,15 @@ def get_application_count_by_month(request):
     for app in appsByMonths:
       data[app['applyDate__month'] - 1] = app['count']
     item['data'] = data  
+    response.append(item)
+  return JsonResponse(response, safe=False)
+
+def get_count_by_statuses(request):
+  statuses = JobApplication.objects.filter(~Q(applicationStatus = None),user_id=request.user.id).values('applicationStatus').annotate(count=Count('pk'))
+  response = []
+  for i in statuses:
+    item = {}
+    item['name'] = ApplicationStatus.objects.get(pk=i['applicationStatus']).value
+    item['value'] = i['count']
     response.append(item)
   return JsonResponse(response, safe=False)
