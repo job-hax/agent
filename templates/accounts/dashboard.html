@@ -220,6 +220,11 @@
                         </section>
                     </section>   
                 {% endif %} 
+                {% if last_sync_time == 'Syncing...' %}
+                    <h6 align="right" style="margin-top:20px">Last sync time : Syncing...</h5>
+                {% else %}
+                    <h6 align="right" style="margin-top:20px">Last sync time : {{ last_sync_time|date:'Y-m-d' }}</h5>
+                {% endif %} 
             </div>                       
         </div>
     </section>

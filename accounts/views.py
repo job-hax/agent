@@ -3,11 +3,18 @@ from django.contrib import messages, auth
 from django.contrib.auth.models import User
 from .models import JobApplication
 from .models import ApplicationStatus
+from .models import Profile
 from .gmail_lookup import fetchJobApplications
 from .linkedin_lookup import get_profile
 from django.http import HttpResponseRedirect
 from background_task import background
 from django.db.models import Q
+import datetime
+from dateutil import tz
+from django.db.models import Count
+from django.core import serializers
+import json
+from django.http import JsonResponse
 
 def register(request):
   if request.method == 'POST':
@@ -96,7 +103,6 @@ def scheduleFetcher(user_id):
     if user.social_auth.filter(provider='google-oauth2'):
         fetchJobApplications(user)
 
-from django.core import serializers
 def getStatuses(request):
   statuses = ApplicationStatus.objects.all()
   data = serializers.serialize("json", statuses)  
@@ -127,14 +133,18 @@ def dashboard(request):
   if request.user.social_auth.filter(provider='linkedin-oauth2'):
         get_profile(request.user)
 
+  profile = Profile.objects.get(user_id= request.user.id)
+  if(profile.gmail_last_update_time == 0):
+    last_sync_time = "Syncing..."
+  else:
+    last_sync_time = datetime.datetime.utcfromtimestamp(profile.gmail_last_update_time)
   context = {
     'job_apps': user_job_apps,
+    'last_sync_time': last_sync_time,
     'statuses': statuses
   }
   return render(request, 'accounts/dashboard.html', context)
 
-import json
-from django.http import JsonResponse
 def addJobApplication(request):
  if request.method == 'POST':
    body = json.loads(request.body)
@@ -161,8 +171,14 @@ def filterJobApplications(request):
       query = query.filter(applyDate__lte=end)
     user_job_apps = query.order_by('-applyDate')
     statuses = ApplicationStatus.objects.all()
+    profile = Profile.objects.get(user_id = request.user.id)
+    if(profile.gmail_last_update_time == 0):
+      last_sync_time = "Syncing..."
+    else:
+      last_sync_time = datetime.datetime.fromtimestamp(profile.gmail_last_update_time)
     context = {
       'job_apps': user_job_apps,
+      'last_sync_time': last_sync_time,
       'statuses': statuses
     }
     return render(request, 'accounts/dashboard.html', context)
@@ -203,20 +219,29 @@ def get_total_application_count(request):
   count = JobApplication.objects.filter(user_id=request.user.id).count()
   return JsonResponse({'count':count})
 
-from django.db.models import Count
 def get_application_count_by_month(request):
   response = []
-  sources = ['LinkedIn','Hired.com','Indeed', 'Others']
+  sources = ['Hired.com','LinkedIn','Indeed', 'Others']
   for i in sources:
     if i != 'Others':
-      appsByMonths = JobApplication.objects.filter(source=i,applyDate__year='2018').values('applyDate__year', 'applyDate__month').annotate(count=Count('pk'))
+      appsByMonths = JobApplication.objects.filter(user_id=request.user.id,source=i,applyDate__year='2018').values('applyDate__year', 'applyDate__month').annotate(count=Count('pk'))
     else:  
-      appsByMonths = JobApplication.objects.filter(~Q(source = 'LinkedIn'),~Q(source = 'Hired.com'),~Q(source = 'Indeed'),applyDate__year='2018').values('applyDate__year', 'applyDate__month').annotate(count=Count('pk'))
+      appsByMonths = JobApplication.objects.filter(~Q(source = 'LinkedIn'),~Q(source = 'Hired.com'),~Q(source = 'Indeed'),user_id=request.user.id,applyDate__year='2018').values('applyDate__year', 'applyDate__month').annotate(count=Count('pk'))
     item = {}
     item['source'] = i
     data = [0] * 12
     for app in appsByMonths:
       data[app['applyDate__month'] - 1] = app['count']
     item['data'] = data  
+    response.append(item)
+  return JsonResponse(response, safe=False)
+
+def get_count_by_statuses(request):
+  statuses = JobApplication.objects.filter(~Q(applicationStatus = None),user_id=request.user.id).values('applicationStatus').annotate(count=Count('pk'))
+  response = []
+  for i in statuses:
+    item = {}
+    item['name'] = ApplicationStatus.objects.get(pk=i['applicationStatus']).value
+    item['value'] = i['count']
     response.append(item)
   return JsonResponse(response, safe=False)

@@ -17,6 +17,7 @@ urlpatterns = [
     path('filterJobApplications', views.filterJobApplications, name='filterJobApplications'),
     path('get_total_application_count', views.get_total_application_count, name='get_total_application_count'),
     path('get_application_count_by_month', views.get_application_count_by_month, name='get_application_count_by_month'),
+    path('get_count_by_statuses', views.get_count_by_statuses, name='get_count_by_statuses'),
     path('addJobApplication', views.addJobApplication, name='addJobApplication'),
     url('', include('social_django.urls', namespace='social')),
     path('dashboard', views.dashboard, name='dashboard')
