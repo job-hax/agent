@@ -178,7 +178,8 @@
                                                         {% csrf_token %}
                                                         <input type="hidden" name="pk" value="{{job_app.pk}}"> 
                                                     </form>
-                                                    <form method="link" action="{% url 'jobdetails' %}">
+                                                    <form action="{% url 'get_job_detail' %}">
+                                                        <input type="hidden" name="pk" value="{{job_app.pk}}">
                                                         <td style="padding-top: 25px">
                                                                 <button class="ant-btn-sm ant-btn-primary" style="margin-left: 16px" >
                                                                     ...
