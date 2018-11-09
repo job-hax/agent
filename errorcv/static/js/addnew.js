@@ -50,9 +50,10 @@ var CollectionCreateForm = Form.create()(/** @class */ (function (_super) {
                 React.createElement(FormItem, { label: "Please select the status:" }, getFieldDecorator('status', {
                     rules: [{ required: true, message: 'Please select the status!' }], initialValue: '1'
                 })(React.createElement(Radio.Group, null,
-                    React.createElement(Radio, { value: "1" }, "Planning"),
+                    React.createElement(Radio, { value: "1" }, "N/A"),
+                    React.createElement(Radio, { value: "2" }, "Planning"),
                     React.createElement(Radio, { value: "2" }, "In Progress"),
-                    React.createElement(Radio, { value: "3" }, "Success"),
+                    React.createElement(Radio, { value: "3" }, "Offer"),
                     React.createElement(Radio, { value: "4" }, "Fail")))),
                 React.createElement(FormItem, { label: "Source" }, getFieldDecorator('source', {
                     rules: [{ required: true, message: 'Please enter the source!' }]
