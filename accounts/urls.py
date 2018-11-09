@@ -22,6 +22,7 @@ urlpatterns = [
     path('get_count_by_statuses', views.get_count_by_statuses, name='get_count_by_statuses'),
     path('get_count_by_statuses', views.get_count_by_statuses, name='get_count_by_statuses'),
     path('get_count_by_jobtitle_and_statuses', views.get_count_by_jobtitle_and_statuses, name='get_count_by_jobtitle_and_statuses'),
+    path('get_job_detail', views.get_job_detail, name='get_job_detail'),
     url('', include('social_django.urls', namespace='social')),
     path('dashboard', views.dashboard, name='dashboard')
 ]

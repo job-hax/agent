@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from .models import JobApplication
 from .models import ApplicationStatus
 from .models import Profile
+from .models import JobPostDetail
 from .gmail_lookup import fetchJobApplications
 from .linkedin_lookup import get_profile
 from django.http import HttpResponseRedirect
@@ -211,6 +212,27 @@ def jobdetails(request):
   context = {
 
   }
+  return render(request, 'accounts/jobdetails.html', context)
+
+def get_job_detail(request): 
+  id = request.GET['pk'] 
+  app = JobApplication.objects.all().get(pk = id)
+  try:
+    details = JobPostDetail.objects.all().get(job_post = app)
+    context = {
+        'posterInformation': json.dumps(details.posterInformation),
+        'decoratedJobPosting': json.dumps(details.decoratedJobPosting),
+        'topCardV2': json.dumps(details.topCardV2),
+        'job': app
+    }
+  except:
+    context = {
+        'posterInformation': '{}',
+        'decoratedJobPosting': '{}',
+        'topCardV2': '{}',
+        'job': app
+    }
+  print(context)
   return render(request, 'accounts/jobdetails.html', context)
 
 def get_total_application_count(request):
