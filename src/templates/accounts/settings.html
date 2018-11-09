@@ -3,37 +3,33 @@
 {% block title %} | Account Settings {% endblock %}
 
 {% block content %}
-<!-- Main Content -->
-  <section id="showcase-inner">
-    <div class="container" style="background-color: rgb(80, 230, 100)">
-      <div class="row text-center">
-        <div class="col-md-12">
-          <h1 class="py-3 text-white">Account Settings</h1>
-          <p class="lead text-white">Configure Your Account</p>
-        </div>
+<!-- Header Background For Navbar -->
+<section id="showcase-inner">
+    <div style="background-color: rgba(114,73,251,.8)">
+      <div class="row text-center" style="padding: 50px">
       </div>
     </div>
-  </section>
+</section> 
 
-    <!-- Breadcrumb -->
-  <section id="bc" class="mt-3">
-    <div class="container">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb1">
-          <li class="breadcrumb1-item">
-            <a href="{% url 'index' %}" style="color: rgb(255, 0, 0)">
-              <i class="fas fa-home"></i> Home</a>
-          </li>
-          <li class="breadcrumb1-item active"> Settings</li>
-        </ol>
-      </nav>
-    </div>
-  </section>
+<!-- Breadcrumb -->
+<section id="bc" class="mt-3">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb1">
+        <li class="breadcrumb1-item">
+          <a href="{% url 'index' %}" style="color: rgb(255, 0, 0)">
+            <i class="fas fa-home"></i> Home</a>
+        </li>
+        <li class="breadcrumb1-item active"> Settings</li>
+      </ol>
+    </nav>
+  </div>
+</section>
 
-  <!-- Alerts -->
-  {% include 'partials/_alerts.html' %}
+<!-- Alerts -->
+{% include 'partials/_alerts.html' %}
 
-  <!-- Metrics Introduction-->
+<!-- Metrics Introduction-->
 
  <section id="metrics" class="py-0">
     <div class="container">

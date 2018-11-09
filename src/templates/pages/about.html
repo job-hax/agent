@@ -8,56 +8,53 @@
 {% block title %} | About Us {% endblock %}
 
 {% block content %}
+<!-- Header Background For Navbar -->
 <section id="showcase-inner">
-  <div class="container" style="background-color: rgb(80, 230, 100)">
-      <div class="row text-center">
-        <div class="col-md-12">
-          <h1 class="display-4 text-white">About ERRORCV</h1>
-          <p class="lead text-white">Shame failure, build future now!</p>
-        </div>
+  <div style="background-color: rgba(114,73,251,.8)">
+    <div class="row text-center" style="padding: 50px">
+    </div>
+  </div>
+</section>
+
+<!-- Breadcrumb -->
+<section id="bc" class="mt-3">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb1">
+        <li class="breadcrumb1-item">
+          <a href="{% url 'index' %}" style="color: rgb(255, 0, 0)">
+            <i class="fas fa-home"></i> Home</a>
+        </li>
+        <li class="breadcrumb1-item active"> About</li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<section id="about" class="py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <h2>We Search For The Perfect Job for you</h2>
+        <p class="lead">Start here</p>
+        <object style="object-fit: scale-down">
+            <img src="{% static 'img/about resized.jpg' %}" >
+        </object>
+        <p class="mt-4">Face failures, learn from failures and make success!</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Breadcrumb -->
-  <section id="bc" class="mt-3">
-    <div class="container">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb1">
-          <li class="breadcrumb1-item">
-            <a href="{% url 'index' %}" style="color: rgb(255, 0, 0)">
-              <i class="fas fa-home"></i> Home</a>
-          </li>
-          <li class="breadcrumb1-item active"> About</li>
-        </ol>
-      </nav>
+<!-- Team -->
+<section id="team" class="py-5">
+  <div class="container">
+    <h2 class="text-center">Our Team</h2>
+    <div class="row text-center">
+      <div class="col-md-12">
+        <p>Sako, Suhas, Seyfo and Ege</p>
+      </div>    
     </div>
-  </section>
-
-  <section id="about" class="py-4">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8">
-          <h2>We Search For The Perfect Job for you</h2>
-          <p class="lead">Start here</p>
-          <object style="object-fit: scale-down">
-              <img src="{% static 'img/about resized.jpg' %}" >
-          </object>
-          <p class="mt-4">Face failures, learn from failures and make success!</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Team -->
-  <section id="team" class="py-5">
-    <div class="container">
-      <h2 class="text-center">Our Team</h2>
-      <div class="row text-center">
-        <div class="col-md-12">
-          <p>Sako, Suhas, Seyfo and Ege</p>
-        </div>    
-      </div>
-    </div>
-  </section>
+  </div>
+</section>
 {% endblock %}

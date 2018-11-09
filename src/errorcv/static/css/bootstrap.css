@@ -2347,6 +2347,18 @@ fieldset[disabled] a.btn {
   border-color: #6c757d;
 }
 
+.btn-secondary1 {
+  color: rgb(66, 66, 66);
+  background-color: #dc96dfa6;
+  border-color: #6c757d;
+}
+
+.btn-secondary1:hover {
+  color: rgb(255, 255, 255);
+  background-color: rgba(188,43,255,.8);
+  border-color: #6c757d;
+}
+
 .btn-secondary:focus, .btn-secondary.focus {
   box-shadow: 0 0 0 0.2rem rgba(134, 142, 150, 0.5);
 }
@@ -4278,7 +4290,7 @@ tbody.collapse.show {
   padding: 0.75rem 1rem;
   margin-bottom: 1rem;
   list-style: none;
-  background-color: #d1d1d1;
+  background-color: #dfc6eba6;
   border-radius: 0.25rem;
 }
 
