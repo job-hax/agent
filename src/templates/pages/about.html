@@ -1,5 +1,8 @@
 {% extends 'base.html' %} 
 
+{% load humanize %}
+
+
 {% load static %}
 
 {% block title %} | About Us {% endblock %}
@@ -40,20 +43,10 @@
           <object style="object-fit: scale-down">
               <img src="{% static 'img/about resized.jpg' %}" >
           </object>
-          <p class="mt-4">Move forward bit by bit</p>
+          <p class="mt-4">Face failures, learn from failures and make success!</p>
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- Work -->
-  <section id="work" class="text-white text-center">
-    <div class="container" style="background-color: rgb(80, 230, 100)">
-      <h2 class="display-4 text-white">We Work For You</h2>
-      <h4 class="text-white">Face failures, learn from failures and make success!</h4>
-      <hr>
-      <a href="#" class="btn btn-secondary text-white btn-lg">View Our Featured Jobs</a>
-  </div>
   </section>
 
   <!-- Team -->
