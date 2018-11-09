@@ -8,3 +8,4 @@ db.sqlite3
 venv
 /static
 .vscode
+.idea
