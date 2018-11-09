@@ -4,59 +4,215 @@
 
 {% block content %}
 <!-- Main Content -->
-  <section id="showcase-inner">
-    <div class="container" style="background-color: rgb(80, 230, 100)">
-      <div class="row text-center">
-        <div class="col-md-12">
-          <h1 class="py-3 text-white">Job Details</h1>
-          <p class="lead text-white">Learn the details of the job</p>
+<section id="showcase-inner">
+  <div class="container" style="background-color: rgb(80, 230, 100)">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h1 class="py-3 text-white">Job Details</h1>
+        <p class="lead text-white">Learn the details of the job</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Breadcrumb -->
+<section id="bc" class="mt-3">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb1">
+        <li class="breadcrumb1-item">
+          <a href="{% url 'dashboard' %}" style="color: rgb(255, 0, 0)">
+            <i class="fas fa-home"></i> Dashboard</a>
+        </li>
+        <li class="breadcrumb1-item active"> Job Details</li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<!-- Alerts -->
+{% include 'partials/_alerts.html' %}
+
+<!-- Job Details Introduction-->
+
+<section id="metrics" class="py-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+          <h2>Welcome {{ user.first_name }}!</h2>
+          <p style="padding-bottom:30px">Here are the details of the job you applied</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Job Detail1: Position, Company Name and Application Date -->
+<section id="metric1" class="py-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+          <h4 id="positionandcompany">Software Engineer Position at Vitamin T</h4>
+          <t id="days_appdate">You applied this position 7 days ago</t>
+          <img id="companylogo" style="width: 100px; height: 100px; margin-left: 180px" src= "https://media.licdn.com/dms/image/C4E0BAQGUZta9AUuRDQ/company-logo_200_200/0?e=1550102400&v=beta&t=2Tr0UbUWCk2cReqi6vf2czbs06M3-YbMfLuW12SsJMg">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Job Detail2: Table1: Company Details and Position Details  -->
+<section id="metric1" class="py-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+          <table >
+            <thead>
+              <th>Company Details</th>
+            </thead>
+            <tbody>
+              <tr>
+                <th style="padding-right: 40px; padding-left:30px">Company Name</th>
+                <td id="companyPageNameLinkWithoutTracking">
+                  <a href= "https://www.linkedin.com/company/vitamin-t-">Vitamin T (view on LinkedIn) </a>
+                </td>
+                <td></td>
+              </tr>
+              <tr>
+                <th style="padding-right: 40px; padding-left:30px">Industry</th>
+                <td id="formattedIndustries">Retail, Computer Software</td>
+                <td></td>
+              </tr>
+              <tr>
+                <th style="padding-right: 40px; padding-left:30px">Year Founded</th>
+                <td id="foundedYear">2011</td>
+                <td></td>
+              </tr>
+              <tr>
+                <th style="padding-right: 40px; padding-left:30px">Employee Size</th>
+                <td id="formattedEmployeeCount">51-200 employees</td>
+                <td></td>
+              </tr>
+            </tbody>
+            <thead>
+              <th style="padding-top: 20px">Position Details</th>
+            </thead> 
+            <tbody>
+              <tr>
+                <th style="padding-right: 40px; padding-left:30px">Position</th>
+                <td id="title">Senior Android Developer</td>
+                <td></td>
+              </tr>
+              <tr>
+                <th style="padding-right: 40px; padding-left:30px">Viewed on LinkedIn</th>
+                <td id="viewCount">144 views</td>
+                <td></td>
+              </tr>
+              <tr>
+                <th style="padding-right: 40px; padding-left:30px">Employment Type</th>
+                <td id="formattedListDate">Full-time</td>
+                <td></td>
+              <tr>
+                <th style="padding-right: 40px; padding-left:30px">Experience Required</th>
+                <td id="formattedExperience">Mid-Senior level</td>
+                <td></td>
+              </tr>
+              <tr>
+                <th style="padding-right: 40px; padding-left:30px">Job Listed</th>
+                <td id="formattedListDate">2018-10-03 (34 days ago)</td>
+                <td></td>
+              </tr>
+              <tr>
+                <th style="padding-right: 40px; padding-left:30px">Expiration Date</th>
+                <td id="formattedExpireDate">2018-12-01 (24 days)</td>
+                <td></td>
+              </tr>
+              <tr>
+                <th style="padding-right: 40px; padding-left:30px">You Applied</th>
+                <td id="applicationdatep">2018-11-01 (7 days ago)</td>
+                <td></td>
+              </tr>
+              <tr>
+                <th style="padding-right: 40px; padding-left:30px">You applied via</th>
+                <td id="source">LinkedIn</td>
+                <td></td>
+              </tr>
+              <tr>
+                <th style="padding-right: 40px; padding-left:30px">Location</th>
+                <td id="formattedLocation">San Francisco</td>
+                <td></td>
+              </tr>
+              <tr>
+                <th style="padding-right: 40px; padding-left:30px">State</th>
+                <td id="addressRegion">California</td>
+                <td></td>
+              </tr>
+              <tr>
+                <th style="padding-right: 40px; padding-left:30px">Country</th>
+                <td id="addressCountry">United States</td>
+                <td></td>
+              </tr>
+            </tbody>
+            <thead>
+              <th style="padding-top: 20px">Recruiter Details</th>
+            </thead>
+            <tbody>
+              <tr>
+                <th style="padding-right: 40px; padding-left:30px">Name</th>
+                <td id="name">Kristi Vo</td>
+                <td></td>
+              </tr>
+              <tr>
+                <th style="padding-right: 40px; padding-left:30px">LinkedIn Page</th>
+                <td id="posterProfileNameLink">
+                    <a href= "https://www.linkedin.com/in/kristivo">https://www.linkedin.com/in/kristivo </a>
+                  </td>
+                <td></td>
+              </tr>
+              <tr>
+                <th style="padding-right: 40px; padding-left:30px">Title</th>
+                <td id="posterHeadline">Creative Recruiter/Talent Agent at Vitamin T</td>
+                <td></td>
+              </tr>
+              <tr>
+                <th style="padding-right: 40px; padding-left:30px">Location</th>
+                <td id="posterFormattedLocation">San Francisco Bay Area</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Details from Recruiter-->
+<section id="recruiterdetails" class="py-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12" style="margin-top: 50px">
+          <h2 style="margin-bottom: 30px">Details from Recruiter</h2>
+          <div style="padding-left: 20px; padding-right:520px; margin-top: 20px">
+            <h5>Company Details</h5>
+            <p id="companyDescription_rawText">
+              We have a simple philosophy at Vitamin T: to personally place the best creative talent in the best jobs for the best companies. Since we’re massively nerdy fans of creative, this sort of thing comes naturally to us, which means as a client, you get hand-picked talent perfectly suited to your job, and as talent, you get freelance work that doesn’t make you want to wash your eyes out with hand sanitizer. Win-win!</br></br>Vitamin T is a division of Aquent.  Visit us at vitamintalent.com          </p>    
+          </div>
+          <div style="padding-left: 20px; padding-right:220px; margin-top: 20px">
+            <h5>Job Details</h5>
+            <p id="description_rawText">
+              We are looking for an Android Developer to help our client build awesome Android apps that integrate with their services platform, working onsite at a well-known retail company for 3 months, potential to extend!  </br> The Android developer for the Mobile Team will report to the Mobile Development Manager for Android Team. The Mobile group is responsible for application architecture, development and innovation of new feature development to support consumer mobile solutions. The ideal candidate will have extensive experience in Android design and development, with one or more apps in the Google Play app store. </br> This is a 100 % hands-on role. Beyond technical capabilities we are also looking for a person who can take diverse and changing requirements and turn them into actionable plans. The ideal candidate will have had experience in the high paced energy of startups as well as experience in the structured world of a large company. Additional responsibilities include mentoring the team, driving Agile methodology, tracking the current tasks of the team members, and escalating issues as needed. The successful applicant will work closely with Business Analysts, other Technical Leads, Software Engineers, Operations, and Quality Assurance Engineers in a collaborative environment to provide quality software and solutions, while providing the necessary leadership to deliver releases on time and on budget. Performs other duties as assigned. </br></br> Responsibilities: </br>• Work with the product team to build exciting new features for our customers. </br>• Work with QA team in analyzing and resolving issues/defects. </br>• Work with Release Engineering team in app deployment activities. </br>• Work with the UX team to implement pixel perfect designs and animations. </br>• Implement unit test cases as part of new feature development. </br>• Regular, dependable attendance & punctuality.</br></br>Must Haves: </br>• Bachelor’s degree in Computer Science/Engineering or equivalent work experience. </br>• 3 + years as a Android Developer with deep understanding of Android UX and UI design paradigms, and ability to implement and design Android apps </br>• 3 + years of depth knowledge of Java </br>• Experienced with using all the building blocks (ex: Fragments/Activities, Services, Content Providers) available in Android SDK. </br>• An Object Oriented philosopher with experience understanding and applying OO design patterns MVP, MVVM. </br>• Experience integrating Android apps with RESTful APIs. Other Skills: </br>• Must have utilized Android Data Binding in building Android Apps. </br>• Must be well versed with Reactive Programming concepts and hands on experience with Rx Java. </br>• Familiar with Dependency Injection principle and enabling this using Dagger 2 on Android apps. </br>• Demonstrable ability to deliver projects on time, with high quality, and within budget. </br>• Ability and desire to thrive in a proactive, high-pressure, client-services, environment. </br>• Nice to have: Kotlin
+            </p>              
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Bottom Padding-->
+<section >
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12" style="padding-top:100px">
         </div>
       </div>
     </div>
   </section>
-
-    <!-- Breadcrumb -->
-  <section id="bc" class="mt-3">
-    <div class="container">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb1">
-          <li class="breadcrumb1-item">
-            <a href="{% url 'dashboard' %}" style="color: rgb(255, 0, 0)">
-              <i class="fas fa-home"></i> Dashboard</a>
-          </li>
-          <li class="breadcrumb1-item active"> Job Details</li>
-        </ol>
-      </nav>
-    </div>
-  </section>
-
-  <!-- Alerts -->
-  {% include 'partials/_alerts.html' %}
-
-  <!-- Metrics Introduction-->
-
- <section id="metrics" class="py-0">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-            <h2>Welcome {{ user.first_name }}!</h2>
-            <p style="padding-bottom:30px">Here are the details of the job</p>
-        </div>
-      </div>
-    </div>
- </section>
-
-  <!-- Metric1: Total Amount of Job Applications -->
- <section id="metric1" class="py-0">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-            <h4>Software Engineer Position at Error CV</h4>
-            <p style="padding-bottom:20px">You applied this position 9 days ago (2018-11-03)</p>
-        </div>
-      </div>
-    </div>
- </section>
-
-
-  {% endblock %}
+{% endblock %}
