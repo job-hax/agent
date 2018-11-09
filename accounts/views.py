@@ -234,6 +234,25 @@ def get_application_count_by_month(request):
     response.append(item)
   return JsonResponse(response, safe=False)
 
+def get_application_count_by_month_with_total(request):
+  response = []
+  sources = ['Hired.com','LinkedIn','Indeed', 'Others', 'Total']
+  for i in sources:
+    if i == 'Total':
+      appsByMonths = JobApplication.objects.filter(user_id=request.user.id,applyDate__year='2018').values('applyDate__year', 'applyDate__month').annotate(count=Count('pk'))
+    elif i != 'Others':
+      appsByMonths = JobApplication.objects.filter(user_id=request.user.id,source=i,applyDate__year='2018').values('applyDate__year', 'applyDate__month').annotate(count=Count('pk'))
+    else:  
+      appsByMonths = JobApplication.objects.filter(~Q(source = 'LinkedIn'),~Q(source = 'Hired.com'),~Q(source = 'Indeed'),user_id=request.user.id,applyDate__year='2018').values('applyDate__year', 'applyDate__month').annotate(count=Count('pk'))
+    item = {}
+    item['source'] = i
+    data = [0] * 12
+    for app in appsByMonths:
+      data[app['applyDate__month'] - 1] = app['count']
+    item['data'] = data  
+    response.append(item)
+  return JsonResponse(response, safe=False)  
+
 def get_count_by_statuses(request):
   statuses = JobApplication.objects.filter(~Q(applicationStatus = None),user_id=request.user.id).values('applicationStatus').annotate(count=Count('pk'))
   response = []
@@ -243,6 +262,7 @@ def get_count_by_statuses(request):
     item['value'] = i['count']
     response.append(item)
   return JsonResponse(response, safe=False)
+  
 
 def get_count_by_jobtitle_and_statuses(request):
   response = {}

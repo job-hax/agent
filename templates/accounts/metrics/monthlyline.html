@@ -1,0 +1,62 @@
+{% load static %}
+<body style="height: 500px; margin: 0">
+    <div id="containerline" style="height: 500px; width: 80%; margin-left: 60px; -webkit-tap-highlight-color: transparent; user-select: none; position: relative;" _echarts_instance_="ec_1541725324471"></div>
+    <script type="text/javascript" src="{% static 'js/echarts.min.js' %} "></script>
+    <script type="text/javascript">
+
+        fetch('get_application_count_by_month_with_total', {
+              method: 'GET'
+            })
+            .then(function(response) {
+              return response.json();
+            })
+            .then(function(jsonResponse) {
+                console.log(jsonResponse);
+                var dom = document.getElementById("containerline");
+                var myChart = echarts.init(dom);
+                var app = {};
+                option = null;
+                var sources = new Array();
+                jsonResponse.forEach(element => {
+                    var source = element.source;
+                    sources.push(source);
+                    element["name"] = element["source"];
+                    delete element["source"];
+                    element["type"] = "line";
+                });
+                option = {
+                title: {
+                    text: 'Monthly Application Line Chart'
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data:sources,
+                    x: 'right'
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ['January','February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: jsonResponse
+                };
+                ;
+                if (option && typeof option === "object") {
+                myChart.setOption(option, true);
+                }
+            });
+
+    </script>
+
+</body>
