@@ -3,13 +3,22 @@
 {% block title %} | Register Account {% endblock %}
 
 {% block content %}
+<!-- Header Background For Navbar -->
+<section id="showcase-inner">
+  <div style="background-color: rgba(114,73,251,.8)">
+    <div class="row text-center" style="padding: 50px">
+    </div>
+  </div>
+</section>
+
+<!-- Page Content -->
 <section id="register" class="bg-light py-5">
     <div class="container">
       <div class="row">
         <div class="col-md-6 mx-auto">
           <div class="card">
             <div >
-              <h4 class="card-header text-white" style="background-color: rgb(10, 200, 40)">
+              <h4 class="card-header text-white" style="background-color: rgba(188,43,255,.8)">
                 <i class="fas fa-user-plus text-white"></i> Register</h4>
             </div>
             <div class="card-body">
@@ -41,11 +50,11 @@
                   <label for="password">Confirm Password</label>
                   <input type="password" name="password2" class="form-control" required>
                 </div>
-                <input type="submit" value="Register" class="btn btn-secondary btn-block">
-                <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-secondary btn-block">
+                <input type="submit" value="Register" class="btn btn-secondary1 btn-block">
+                <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-secondary1 btn-block">
                   Sign up with Google
                 </a>
-                <a href="{% url 'social:begin' 'linkedin-oauth2' %}" class="btn btn-secondary btn-block">
+                <a href="{% url 'social:begin' 'linkedin-oauth2' %}" class="btn btn-secondary1 btn-block">
                   Sign up with LinkedIn
                 </a>
               </form>
