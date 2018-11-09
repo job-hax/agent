@@ -41,12 +41,13 @@
 </head>
 
 <body>
-  <!-- Top Bar -->
-  {% include 'partials/_topbar.html' %}
+
   <!-- NavBar -->
   {% include 'partials/_navbar.html' %}
     <!-- Main Content -->
   {% block content %} {% endblock %}
+    <!-- Top Bar -->
+    {% include 'partials/_topbar.html' %}
   <!-- Footer -->
   {% include 'partials/_footer.html' %}
   
