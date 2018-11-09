@@ -15,6 +15,7 @@ from .social_auth_credentials import Credentials
 from social_django.utils import load_strategy
 
 from .models import JobApplication
+from .models import ApplicationStatus
 from .models import JobPostDetail
 import base64
 import time
@@ -88,7 +89,8 @@ def get_email_detail(service, user_id, msg_id, user, source):
       inserted_before = JobApplication.objects.all().filter(msgId=msg_id)
       print(image_url)
       if not inserted_before and jobTitle != '' and company != '':
-        japp = JobApplication(jobTitle=jobTitle, company=company, applyDate=date, msgId=msg_id, source = source, user = user, companyLogo = image_url)
+        status = ApplicationStatus.objects.all().get(value='N/A')
+        japp = JobApplication(jobTitle=jobTitle, company=company, applyDate=date, msgId=msg_id, source = source, user = user, companyLogo = image_url, applicationStatus = status)
         japp.save()
         if(source == 'LinkedIn'):
             japp_details = JobPostDetail(job_post = japp, posterInformation = posterInformationJSON, decoratedJobPosting = decoratedJobPostingJSON, topCardV2 = topCardV2JSON)

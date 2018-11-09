@@ -79,13 +79,9 @@ def updateJobApplication(request):
   if request.method == 'POST':
     user_job_app = JobApplication.objects.get(pk=request.POST['pk'])
     status = request.POST['ddStatus']
-    if status == -1:
-        pass
-    else:
-        user_job_app.applicationStatus = ApplicationStatus.objects.get(pk=status)
-        user_job_app.save()
-        messages.success(request, '.')
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    user_job_app.applicationStatus = ApplicationStatus.objects.get(pk=status)
+    user_job_app.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
   else:
     return dashboard(request)
 
@@ -113,11 +109,13 @@ def dashboard(request):
   statuses = ApplicationStatus.objects.all()
 
   if len(statuses) == 0:
+    dummyStatus = ApplicationStatus(value = 'N/A')
+    dummyStatus.save()
     dummyStatus = ApplicationStatus(value = 'Planning')
     dummyStatus.save()
     dummyStatus = ApplicationStatus(value = 'In Progress')
     dummyStatus.save()
-    dummyStatus = ApplicationStatus(value = 'Success')
+    dummyStatus = ApplicationStatus(value = 'Offer')
     dummyStatus.save()
     dummyStatus = ApplicationStatus(value = 'Fail')
     dummyStatus.save()
