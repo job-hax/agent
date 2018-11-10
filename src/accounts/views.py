@@ -53,6 +53,19 @@ def register(request):
   else:
     return render(request, 'accounts/register.html')
 
+def update_user(request):
+  user = request.user
+  user.username = request.POST['newusername']    
+  user.first_name = request.POST['newuserfirstname']    
+  user.last_name = request.POST['newuserlastname']  
+  user.save()  
+  return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def delete_account(request):
+  request.user.delete()
+  auth.logout(request)
+  return redirect('index')
+
 def login(request):
   if request.method == 'POST':
     username = request.POST['username']

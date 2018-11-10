@@ -45,37 +45,40 @@
   <!-- Metric1: Total Amount of Job Applications -->
  <section id="metric1" class="py-0">
     <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-            <h4>User Information</h4>
-        </div>
-        <table >
-          <thead>
-            <th style="padding-top: 50px">Change your information</th>
-          </thead>
-          <tbody>
-            <tr>
-              <th style="padding-right: 40px; padding-left:30px">User Name</th>
-              <td>
-                <input id="newusername" target="_blank"></input>
-              </td>
-              <td></td>
-            </tr>
-            <tr>
-              <th style="padding-right: 40px; padding-left:30px">First Name</th>
-              <td>
-                <input id="newuserfirstname" target="_blank"></input>
-              </td>
-              <td></td>
-            </tr>
-            <tr>
-              <th style="padding-right: 40px; padding-left:30px">Last Name</th>
-              <td>
-                  <input id="newuserlastname" target="_blank"></input>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="row" style="padding-left: 20px">
+        <form action="{% url 'update_user' %}" method="POST">
+          {% csrf_token %}
+          <table >
+            <thead>
+              <th>Change your information</th>
+            </thead>
+            <tbody>
+              <tr>
+                <th style="padding-right: 40px; padding-left:30px">User Name</th>
+                <td>
+                  <input name="newusername" value="{{ user.username }}"></input>
+                </td>
+                <td></td>
+              </tr>
+              <tr>
+                <th style="padding-right: 40px; padding-left:30px">First Name</th>
+                <td>
+                  <input name="newuserfirstname" value="{{ user.first_name }}"></input>
+                </td>
+                <td></td>
+              </tr>
+              <tr>
+                <th style="padding-right: 40px; padding-left:30px">Last Name</th>
+                <td>
+                    <input name="newuserlastname" value="{{ user.last_name }}"></input>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <button style="margin-left: 330px; margin-top: 30px">
+            Update
+          </button>
+        </form>
       </div>
     </div>
  </section>
@@ -85,12 +88,12 @@
     <div class="container">
       <div class="row">
         <div style="padding-left:30px; padding-top:20px">
-            <button>
-              Update
-            </button>
-            <button >
-              Delete My Account
-            </button>
+            <form action="{% url 'delete_account' %}" method="POST">
+              {% csrf_token %}
+              <button style="margin-top: 20px">
+                Delete My Account
+              </button>
+          </form>
           </div>
       </div>
     </div>

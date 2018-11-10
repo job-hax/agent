@@ -69,12 +69,12 @@
             </tr>
             <tr>
               <th style="padding-right: 40px; padding-left:30px">Last Login</th>
-              <td id="lastlogin"></td>
+              <td id="lastlogin">{{ user.last_login|date:'Y-m-d' }}</td>
               <td></td>
             </tr>
             <tr>
               <th style="padding-right: 40px; padding-left:30px">Date Joined</th>
-              <td id="joindate"></td>
+              <td id="joindate">{{ user.date_joined|date:'Y-m-d' }}</td>
               <td></td>
             </tr>
           </tbody>
