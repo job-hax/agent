@@ -24,7 +24,7 @@ class ApplicationStatus(models.Model):
     return self.value  
 
 class JobApplication(models.Model):
-  user = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True, blank=True)
+  user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
   applicationStatus = models.ForeignKey(ApplicationStatus, on_delete=models.DO_NOTHING, null=True, blank=True)
   jobTitle = models.CharField(max_length=200)
   company = models.CharField(max_length=200)
