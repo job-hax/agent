@@ -75,7 +75,7 @@
               </tr>
             </tbody>
           </table>
-          <button style="margin-left: 330px; margin-top: 30px">
+          <button style="margin-left: 330px; margin-top: 10px" class="btn btn-secondary">
             Update
           </button>
         </form>
@@ -90,7 +90,7 @@
         <div style="padding-left:30px; padding-top:20px">
             <form action="{% url 'delete_account' %}" method="POST">
               {% csrf_token %}
-              <button style="margin-top: 20px">
+              <button class="btn btn-secondary">
                 Delete My Account
               </button>
           </form>
