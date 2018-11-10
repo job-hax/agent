@@ -17,7 +17,7 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb1">
         <li class="breadcrumb1-item">
-          <a href="{% url 'index' %}" style="color: rgb(255, 0, 0)">
+          <a href="{% url 'index' %}" style="color: rgb(66, 66, 66)">
             <i class="fas fa-home"></i> Home</a>
         </li>
         <li class="breadcrumb1-item active"> Profile</li>
@@ -36,8 +36,49 @@
     <div class="row">
       <div class="col-md-12">
           <h2>{{ user.first_name }}'s Profile</h2>
-          <p style="padding-bottom:30px">You can update your profile information here</p>
+          <p style="padding-bottom:30px">You can see your profile information here</p>
       </div>
+      <table >
+          <thead>
+            <th >Profile Information</th>
+          </thead>
+          <tbody>
+            <tr>
+              <th style="padding-right: 40px; padding-left:30px">User Name</th>
+              <td>
+                <a id="username" target="_blank">{{ user.username }}</a>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <th style="padding-right: 40px; padding-left:30px">First Name</th>
+              <td>
+                <a id="userfirstname" target="_blank">{{ user.first_name }}</a>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <th style="padding-right: 40px; padding-left:30px">Last Name</th>
+              <td id="userlastname">{{ user.last_name }}</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th style="padding-right: 40px; padding-left:30px">Email address</th>
+              <td id="emailaddress">{{ user.email }}</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th style="padding-right: 40px; padding-left:30px">Last Login</th>
+              <td id="lastlogin"></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th style="padding-right: 40px; padding-left:30px">Date Joined</th>
+              <td id="joindate"></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
     </div>
   </div>
 </section>

@@ -4298,7 +4298,7 @@ tbody.collapse.show {
   display: inline-block;
   padding-right: 0.5rem;
   padding-left: 0.5rem;
-  color: #3a972d;
+  color: #666666;
   content: "/";
 }
 
@@ -4311,7 +4311,7 @@ tbody.collapse.show {
 }
 
 .breadcrumb1-item.active {
-  color: #3a972d;
+  color: #666666;
 }
 
 .pagination {
