@@ -1,0 +1,33 @@
+{% load static %}
+<!doctype html>
+<html>
+
+<head>
+    <title>CloudMetrics</title>
+    <meta charset = "UTF-8">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.js"></script>
+    <script src="{% static 'js/wordcloud.js' %}"></script>
+    <script src="{% static 'js/easy-word-cloud.js' %}"></script>
+
+</head>
+
+<body>
+    <script >
+// Don't forget to load dom. Otherwise, makeWordCloud function might fails to work.
+$().ready(function(){
+    // Make sure the format => [ {"word": String, "value": Number}, ..., ... ]
+    // Value should be greater than 0
+    data = [
+        {"word": "seyfo", "value": 33}, 
+        {"word": "pyhton", "value": 13}, 
+    ]
+    
+    // you can use own color converting function if you want
+    var my_color = d3.scale.category20();
+    window.makeWordCloud(data, "body", 500, "my_svg", "Impact", true, my_color)
+})
+    </script>
+</body>
+</html>
