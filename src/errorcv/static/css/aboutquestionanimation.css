@@ -25,7 +25,7 @@ body {
   left: 0;
 }
 .content__container:after {
-  content: '?';
+  content: '';
   position: absolute;
   right: 0;
 }

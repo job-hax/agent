@@ -253,6 +253,12 @@ def jobdetails(request):
   }
   return render(request, 'accounts/jobdetails.html', context)
 
+def wordcloud(request):
+  context = {
+
+  }
+  return render(request, 'accounts/metrics/wordcloud.html', context)
+
 def get_job_detail(request): 
   id = request.GET['pk'] 
   app = JobApplication.objects.all().get(pk = id)
