@@ -19,14 +19,20 @@
 $().ready(function(){
     // Make sure the format => [ {"word": String, "value": Number}, ..., ... ]
     // Value should be greater than 0
-    data = [
-        {"word": "seyfo", "value": 33}, 
-        {"word": "pyhton", "value": 13}, 
-    ]
+    fetch('get_word_count', {
+              method: 'GET'
+            })
+            .then(function(response) {
+              return response.json();
+            })
+            .then(function(jsonResponse) {
+                data = jsonResponse
     
-    // you can use own color converting function if you want
-    var my_color = d3.scale.category20();
-    window.makeWordCloud(data, "body", 500, "my_svg", "Impact", true, my_color)
+                // you can use own color converting function if you want
+                var my_color = d3.scale.category20();
+                window.makeWordCloud(data, "body", 500, "my_svg", "Impact", true, my_color)
+            });
+    
 })
     </script>
 </body>

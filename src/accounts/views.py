@@ -330,6 +330,33 @@ def get_count_by_statuses(request):
     response.append(item)
   return JsonResponse(response, safe=False)
   
+def get_word_count(request):
+  response = []
+  job_titles = JobApplication.objects.filter(user_id=request.user.id).values('jobTitle').annotate(count=Count('pk'))
+  for i in job_titles:
+    item = {}
+    item['word'] = i['jobTitle']
+    item['value'] = i['count']
+    response.append(item)
+  statuses = JobApplication.objects.filter(~Q(applicationStatus = None),user_id=request.user.id).values('applicationStatus').annotate(count=Count('pk'))
+  for i in statuses:
+    item = {}
+    item['word'] = ApplicationStatus.objects.get(pk=i['applicationStatus']).value
+    item['value'] = i['count']
+    response.append(item)  
+  companies = JobApplication.objects.filter(user_id=request.user.id).values('company').annotate(count=Count('pk'))
+  for i in companies:
+    item = {}
+    item['word'] = i['company']
+    item['value'] = i['count']
+    response.append(item)  
+  sources = JobApplication.objects.filter(user_id=request.user.id).values('source').annotate(count=Count('pk'))
+  for i in sources:
+    item = {}
+    item['word'] = i['source']
+    item['value'] = i['count']
+    response.append(item)   
+  return JsonResponse(response, safe=False)  
 
 def get_count_by_jobtitle_and_statuses(request):
   response = {}
