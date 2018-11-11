@@ -75,7 +75,6 @@ def login(request):
 
     if user is not None:
       auth.login(request, user)
-      messages.success(request, 'You are now logged in')
       return redirect('dashboard')
     else:
       messages.error(request, 'Invalid credentials')
@@ -86,8 +85,25 @@ def login(request):
 def logout(request):
   if request.method == 'POST':
     auth.logout(request)
-    messages.success(request, 'You are now logged out')
     return redirect('index')
+
+def social_user(backend, uid, user=None, *args, **kwargs):
+    '''OVERRIDED: It will logout the current user
+    instead of raise an exception '''
+
+    provider = backend.name
+    social = backend.strategy.storage.user.get_social_auth(provider, uid)
+    if social:
+        if user and social.user != user:
+            logout(backend.strategy.request)
+            #msg = 'This {0} account is already in use.'.format(provider)
+            #raise AuthAlreadyAssociated(backend, msg)
+        elif not user:
+            user = social.user
+    return {'social': social,
+            'user': user,
+            'is_new': user is None,
+            'new_association': False}    
 
 def updateJobApplication(request):
   if request.method == 'POST':
@@ -211,8 +227,18 @@ def job_board(request):
 
 def profile(request):
   context = {
-
+      
   }
+  if request.user.social_auth.filter(provider='google-oauth2'):
+    context['google'] = True
+  else:
+    context['google'] = False
+  if request.user.social_auth.filter(provider='linkedin-oauth2'):
+    context['linkedin'] = True
+    profile = Profile.objects.get(user_id= request.user.id)  
+    context['linkedin_info'] = json.dumps(profile.linkedin_info)
+  else:
+    context['linkedin'] = False  
   return render(request, 'accounts/profile.html', context)
 
 def settings(request):

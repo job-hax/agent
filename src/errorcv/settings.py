@@ -139,7 +139,8 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.auth_allowed',
 
     # Checks if the current social-account is already associated in the site.
-    'social_core.pipeline.social_auth.social_user',
+    'accounts.views.social_user',
+    #'social_core.pipeline.social_auth.social_user',
 
     # Make up a username for this person, appends a random string at the end if
     # there's any collision.

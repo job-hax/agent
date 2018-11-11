@@ -40,6 +40,9 @@
           <p style="padding-bottom:30px">You can see your profile information here</p>
       </div>
       <table >
+          {% if linkedin_info %}
+          <td></td><td > <img src="" id="pictureUrl" style="width: 100px; height: 100px;"></td>
+          {% endif %}
           <thead>
             <th >Profile Information</th>
           </thead>
@@ -64,10 +67,37 @@
               <td></td>
             </tr>
             <tr>
-              <th style="padding-right: 40px; padding-left:30px">Email address</th>
-              <td id="emailaddress">{{ user.email }}</td>
-              <td></td>
+                <th style="padding-right: 40px; padding-left:30px">Email address</th>
+                <td id="emailaddress">{{ user.email }}</td>
+                <td></td>
             </tr>
+            {% if linkedin_info %}
+              <tr>
+                <th style="padding-right: 40px; padding-left:30px">Industry</th>
+                <td id="industry"></td>
+                <td></td>
+              </tr>
+              <tr>
+                  <th style="padding-right: 40px; padding-left:30px">Location</th>
+                  <td id="location"></td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <th style="padding-right: 40px; padding-left:30px">LinkedIn Connections</th>
+                  <td id="numConnections"></td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <th style="padding-right: 40px; padding-left:30px">LinkedIn URL</th>
+                  <td><a id="publicProfileUrl" target="_blank"></a></td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <th style="padding-right: 40px; padding-left:30px">Summary</th>
+                  <td id="summary"></td>
+                  <td></td>
+              </tr>
+            {% endif %} 
             <tr>
               <th style="padding-right: 40px; padding-left:30px">Last Login</th>
               <td id="lastlogin">{{ user.last_login|date:'Y-m-d' }}</td>
@@ -84,6 +114,36 @@
   </div>
 </section>
 
+<!-- Sync Buttons-->
+<section >
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12" style="padding-top:50px">
+        {% if google == False %} 
+          <a class="btn btn-secondary" style="color:white" href="{% url 'social:begin' 'google-oauth2' %}">Sync with Google</a>
+        {% endif %}
+        {% if linkedin == False %} 
+          <a class="btn btn-secondary" style="color:white" href="{% url 'social:begin' 'linkedin-oauth2' %}">Sync with LinkedIn</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% if linkedin_info %}
+<script>
+    var obj = {{ linkedin_info|safe }};
+    var json = JSON.parse(obj);
+    console.log(json);
+    document.getElementById('industry').innerHTML = json.industry;
+    document.getElementById('location').innerHTML = json.location.name;
+    document.getElementById('numConnections').innerHTML = json.numConnections;
+    document.getElementById('publicProfileUrl').href = json.publicProfileUrl;
+    document.getElementById('publicProfileUrl').innerHTML = json.publicProfileUrl;
+    document.getElementById('summary').innerHTML = json.summary;
+    document.getElementById('pictureUrl').src = json.pictureUrl;
+</script>
+{% endif %} 
+
 <!-- Bottom Padding-->
 <section >
   <div class="container">
@@ -94,4 +154,4 @@
   </div>
 </section>
 
-  {% endblock %}
+{% endblock %}
