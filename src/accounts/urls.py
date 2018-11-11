@@ -10,6 +10,7 @@ urlpatterns = [
     path('delete_account', views.delete_account, name='delete_account'),
     path('update_user', views.update_user, name='update_user'),
     path('metrics', views.metrics, name='metrics'),
+    path('wordcloud', views.wordcloud, name='wordcloud'),
     path('job_board', views.job_board, name='job_board'),
     path('profile', views.profile, name='profile'),
     path('settings', views.settings, name='settings'),
