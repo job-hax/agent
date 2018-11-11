@@ -46,4 +46,4 @@ def parse_job_detail(body):
     return posterInformationJSON, decoratedJobPostingJSON, topCardV2JSON
   except Exception as e:
       print(e)  
-      return ''
+      return '{}','{}','{}'
