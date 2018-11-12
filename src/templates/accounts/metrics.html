@@ -34,12 +34,12 @@
 
 <!-- Metrics Introduction-->
 
-<section id="metrics" class="py-0">
+<section id="metrics" >
   <div class="container">
     <div class="row">
-      <div class="col-md-12">
+      <div >
           <h2>Welcome {{ user.first_name }}!</h2>
-          <p style="padding-bottom:30px">Here are your job applications statistics</p>
+          <p>Here are your job applications statistics</p>
           <!--<li >
             <a href="{% url 'wordcloud' %}" style="color: rgb(66, 66, 66)">
               wordcloud
@@ -54,7 +54,7 @@
 <section id="mainmetric1" class="py-0">
   <div class="container">
     <div class="row">
-      <div class="col-md-12" style="padding-left:50px">
+      <div class="col-md-12" style="padding-left:50px; margin-top: 3%">
           <h4 id="count_title"></h4>
           <p id = "count_desc" ></p>
           <script>
@@ -75,6 +75,46 @@
     </div>
   </div>
 </section>
+
+<!--================Feature Area =================-->
+<section class="feature_area p_120" id="feature" style="margin-top:-5%">
+    <div class="container">
+      <div class="feature_inner row">
+        <div class="col-lg-3 col-md-6">
+          <div class="feature_item">
+            <img src="/static/images/monthlyappchartex.png" style="width:100%; height: 100%" >
+            <h4 style="padding-top: 15px">Monthly Application</h4>
+            <p>You can easily track how many applications you have made each month!</p>
+            <a class="btn btn-secondary" style="margin-top:17%; margin-left:20%" href="#mainmetric2">Go Graph</a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="feature_item">
+            <img src="/static/images/monthlyapplinechartex.png" style="width:100%; height: 100%">
+            <h4 style="padding-top: 10px">Application Trend</h4>
+            <p>You can easily track the trend of your applications</p>
+            <a class="btn btn-secondary" style="margin-top:30%; margin-left:20%" href="#mainmetric2line">Go Graph</a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="feature_item">
+            <img src="/static/images/appstageschartex.png" style="width:100%; height: 100%">
+            <h4 style="padding-top: 0px">Application Stages</h4>
+            <p>You can easily track how many of your applications at which stage</p>
+            <a class="btn btn-secondary" style="margin-top:20%; margin-left:20%" href="#metric3">Go Graph</a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="feature_item">
+            <img src="/static/images/positionbystageschartex.png" style="width:100%; height: 100%">
+            <h4 style="padding-top: 5px">Stages in Positions</h4>
+            <p>You can easily track how many of your applications for each position at which stage</p>
+            <a class="btn btn-secondary" style="margin-top:10%; margin-left:20%" href="#metric4">Go Graph</a>
+        </div>
+      </div>
+    </div>
+    </section>
+    <!--================End Feature Area =================-->
 
 <!-- Graph Selector
 <section id="graphselectorsec">
@@ -104,7 +144,7 @@
 <section id="mainmetric2" class="py-0">
   <div class="container">
     <div class="row">
-      <div class="col-md-12" style="padding-left:50px">
+      <div class="col-md-12" style="padding-left:50px; margin-top: 7%">
           <h4>Monthly application chart of 2018</h4>
           <p style="padding-bottom:20px">You can easily track how many applications you have made each month</p>
           <div>
@@ -119,7 +159,7 @@
 <section id="mainmetric2line" >
   <div class="container">
     <div class="row">
-      <div class="col-md-12" style="padding-left:50px; padding-top:80px">
+      <div class="col-md-12" style="padding-left:50px; margin-top: 7%">
           <h4>Monthly application chart of 2018: Line Chart</h4>
           <p style="padding-bottom:20px">You can easily track the trend of your applications</p>
           <div>
@@ -134,7 +174,7 @@
 <section id="metric3" >
   <div class="container">
     <div class="row">
-      <div class="col-md-12" style="padding-left:50px; padding-top:80px">
+      <div class="col-md-12" style="padding-left:50px; margin-top: 7%; margin-bottom: 5%">
           <h4>Application stages chart of 2018</h4>
           <p style="padding-bottom:20px">You can easily track how many of your applications at which stage</p>
           <div>
@@ -150,7 +190,7 @@
 <section id="metric4">
   <div class="container">
     <div class="row">
-      <div class="col-md-12" style="padding-left:50px; padding-top:80px">
+      <div class="col-md-12" style="padding-left:50px; margin-top: 7%">
           <h4>Applications Stages in Positions</h4>
           <p style="padding-bottom:20px">You can easily track how many of your applications for each position at which stage</p>
           <div>
@@ -161,6 +201,22 @@
   </div>
 </section>
 
+<!-- Metric5: Word Cloud: Job List
+<section id="metric5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12" style="padding-left:50px; padding-top:80px">
+          <h4>Applications Word Cloud</h4>
+          <p style="padding-bottom:20px">Enjoy the fun way of your applications' analysis</p>
+          <div>
+            {% include 'accounts/metrics/wordcloud.html' %}
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+ -->
+ 
 <!-- Graph Selector Script
 <script>
   function change() {
@@ -197,4 +253,15 @@
     </div>
   </div>
 </section>
+
+<!-- Bottom Padding-->
+<section >
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12" style="padding-top:50px">
+      </div>
+    </div>
+  </div>
+</section>
+
 {% endblock %}
