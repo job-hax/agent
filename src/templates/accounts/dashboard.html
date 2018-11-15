@@ -155,47 +155,55 @@
                                                 </th>
                                             </tr>
                                         </thead>
-                                        <tbody > 
-                                            {% for job_app in job_apps %}
-                                                <tr>
-                                                    <form action="{% url 'updateJobApplication' %}" method="POST">
-                                                        <td style="padding-top: 25px"> {{ forloop.counter }}</td>
-                                                        <td > <img src="{{ job_app.companyLogo }}"  style="width: 50px; height: 50px;"></td>
-                                                        <td style="padding-top: 25px">{{ job_app.company }}</td>
-                                                        <td style="padding-top: 25px">{{ job_app.jobTitle }}</td>
-                                                        <td style="padding-top: 25px">{{ job_app.applyDate|date:'Y-m-d' }}</td>
-                                                        <td style="padding-top: 25px">
-                                                            <select name="ddStatus"  onchange="this.form.submit()">
-                                                                {% for status in statuses %}
-                                                                    <option value="{{status.pk}}"
-                                                                        {% if status == job_app.applicationStatus %}selected="selected"{% endif %}>
-                                                                        {{status.value|capfirst}}
-                                                                    </option>
-                                                                {% endfor %}
-                                                            </select>
+                                            <tbody > 
+                                                {% for job_app in job_apps %}
+                                                    <tr id="accordion">
+                                                        <form action="{% url 'updateJobApplication' %}" method="POST">
+                                                            <td style="padding-top: 25px"> {{ forloop.counter }}</td>
+                                                            <td > <img src="{{ job_app.companyLogo }}"  style="width: 50px; height: 50px;"></td>
+                                                            <td style="padding-top: 25px"><a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ forloop.counter }}"><span class="glyphicon glyphicon-folder-close">
+                                                            </span>{{ job_app.company }}</a></td>
+                                                            <td style="padding-top: 25px">{{ job_app.jobTitle }}</td>
+                                                            <td style="padding-top: 25px">{{ job_app.applyDate|date:'Y-m-d' }}</td>
+                                                            <td style="padding-top: 25px">
+                                                                <select name="ddStatus"  onchange="this.form.submit()">
+                                                                    {% for status in statuses %}
+                                                                        <option value="{{status.pk}}"
+                                                                            {% if status == job_app.applicationStatus %}selected="selected"{% endif %}>
+                                                                            {{status.value|capfirst}}
+                                                                        </option>
+                                                                    {% endfor %}
+                                                                </select>
+                                                            </td>
+                                                            <td style="padding-top: 25px">{{ job_app.source }}</td>
+                                                            {% csrf_token %}
+                                                            <input type="hidden" name="pk" value="{{job_app.pk}}"> 
+                                                        </form>
+                                                        <form action="{% url 'get_job_detail' %}">
+                                                            <input type="hidden" name="pk" value="{{job_app.pk}}">
+                                                            <td style="padding-top: 25px">
+                                                                    <button class="ant-btn-sm ant-btn-primary" style="margin-left: 16px" >
+                                                                        ...
+                                                                    </button>
+                                                            </td>
+                                                        </form>
+                                                            <td style="padding-top: 25px">
+                                                                <form action="{% url 'deleteJobApplication' %}" method="POST">
+                                                                    {% csrf_token %}
+                                                                    <input type="hidden" name="pk" value="{{job_app.pk}}">
+                                                                    <input class="ant-btn-sm ant-btn-danger active" type="submit" value="-" style="margin-left: 16px; height: 25px">
+                                                                </form>    
+                                                            </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="6">
+                                                            <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse in">
+                                                                {% include 'partials/_footer.html' %}
+                                                            </div>
                                                         </td>
-                                                        <td style="padding-top: 25px">{{ job_app.source }}</td>
-                                                        {% csrf_token %}
-                                                        <input type="hidden" name="pk" value="{{job_app.pk}}"> 
-                                                    </form>
-                                                    <form action="{% url 'get_job_detail' %}">
-                                                        <input type="hidden" name="pk" value="{{job_app.pk}}">
-                                                        <td style="padding-top: 25px">
-                                                                <button class="ant-btn-sm ant-btn-primary" style="margin-left: 16px" >
-                                                                    ...
-                                                                </button>
-                                                        </td>
-                                                    </form>
-                                                        <td style="padding-top: 25px">
-                                                            <form action="{% url 'deleteJobApplication' %}" method="POST">
-                                                                {% csrf_token %}
-                                                                <input type="hidden" name="pk" value="{{job_app.pk}}">
-                                                                <input class="ant-btn-sm ant-btn-danger active" type="submit" value="-" style="margin-left: 16px; height: 25px">
-                                                            </form>    
-                                                        </td>
-                                                </tr>
-                                            {% endfor %}
-                                        </tbody>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
                                     </table>
                                 </div>
                             </div>
