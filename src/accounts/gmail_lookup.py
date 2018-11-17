@@ -12,6 +12,7 @@ from requests import exceptions as requests_errors
 
 from google.auth.exceptions import RefreshError
 from .social_auth_credentials import Credentials
+#from google.oauth2.credentials import Credentials
 from social_django.utils import load_strategy
 
 from .models import JobApplication
@@ -140,27 +141,36 @@ def fetchJobApplications(user):
     else:
         print('its the first time.. so we are querying all mails')
 
-    #initiates Gmail API
-    usa = user.social_auth.get(provider='google-oauth2')
-    GMAIL = build('gmail', 'v1', credentials=Credentials(usa))
+    try:
+        #initiates Gmail API
+        usa = user.social_auth.get(provider='google-oauth2')
+        cre = Credentials(usa)
+        GMAIL = build('gmail', 'v1', credentials=cre)
+        #usa = user.social_auth.get(provider='google-oauth2')
+        #strategy = load_strategy()
+        #usa.refresh_token(strategy)
+        #creds= Credentials(usa.extra_data['access_token'])
+        #GMAIL = build('gmail', 'v1', credentials=creds)
 
-    #retrieves user email's with custom query parameter
-    linkedInMessages = get_emails_with_custom_query(GMAIL, 'me', 'from:jobs-listings@linkedin.com AND subject:You applied for' + time_string)# AND after:2018/01/01')
-    hiredMessages = get_emails_with_custom_query(GMAIL, 'me', 'from:reply@hired.com AND subject:Interview Request' + time_string)
-    #vetteryMessages = get_emails_with_custom_query(GMAIL, 'me', 'from:@connect.vettery.com AND subject:Interview Request' + time_string)
-    indeedMessages = get_emails_with_custom_query(GMAIL, 'me', 'from:indeedapply@indeed.com AND subject:Indeed Application' + time_string)
+        #retrieves user email's with custom query parameter
+        linkedInMessages = get_emails_with_custom_query(GMAIL, 'me', 'from:jobs-listings@linkedin.com AND subject:You applied for' + time_string)# AND after:2018/01/01')
+        hiredMessages = get_emails_with_custom_query(GMAIL, 'me', 'from:reply@hired.com AND subject:Interview Request' + time_string)
+        #vetteryMessages = get_emails_with_custom_query(GMAIL, 'me', 'from:@connect.vettery.com AND subject:Interview Request' + time_string)
+        indeedMessages = get_emails_with_custom_query(GMAIL, 'me', 'from:indeedapply@indeed.com AND subject:Indeed Application' + time_string)
 
-    #retvieves specific email's detail one by one
-    for message in linkedInMessages:
-        get_email_detail(GMAIL, 'me', message['id'], user, 'LinkedIn')
-    for message in hiredMessages:
-        get_email_detail(GMAIL, 'me', message['id'], user, 'Hired.com')
-    for message in indeedMessages:
-        get_email_detail(GMAIL, 'me', message['id'], user, 'Indeed')
-    #for message in vetteryMessages:
-    #    GetMessage(GMAIL, 'me', message['id'], user, 'Vettery')
+        #retvieves specific email's detail one by one
+        for message in linkedInMessages:
+            get_email_detail(GMAIL, 'me', message['id'], user, 'LinkedIn')
+        for message in hiredMessages:
+            get_email_detail(GMAIL, 'me', message['id'], user, 'Hired.com')
+        for message in indeedMessages:
+            get_email_detail(GMAIL, 'me', message['id'], user, 'Indeed')
+        #for message in vetteryMessages:
+        #    GetMessage(GMAIL, 'me', message['id'], user, 'Vettery')
 
-    #updates user last update time after all this
-    now = datetime.utcnow().timestamp()
-    profile.gmail_last_update_time = now
-    profile.save()
+        #updates user last update time after all this
+        now = datetime.utcnow().timestamp()
+        profile.gmail_last_update_time = now
+        profile.save()      
+    except Exception as error:
+        print('An error occurred: %s' % error)
