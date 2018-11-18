@@ -3,6 +3,13 @@ python:
   - "3.7"
 install:
   - pip install tox coveralls
+services:
+  - postgresql
+before_script:
+  - psql postgres -c "CREATE USER errorcv WITH PASSWORD 'errorcv';"
+  - psql postgres -c "CREATE DATABASE errorcv WITH OWNER 'errorcv';"
+  - psql postgres -c "ALTER USER errorcv CREATEDB;"
+
 script:
   - tox
 after_success:
