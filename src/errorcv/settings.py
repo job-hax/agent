@@ -79,17 +79,28 @@ WSGI_APPLICATION = 'errorcv.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'errorcv',
-        'USER': 'errorcv',
-        'PASSWORD': 'errorcv',
-        'HOST': 'localhost',
-        'PORT': '',
+if 'TRAVIS' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE':   'django.db.backends.postgresql',
+            'NAME':     'travisci',
+            'USER':     'postgres',
+            'PASSWORD': '',
+            'HOST':     'localhost',
+            'PORT':     '',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'errorcv',
+            'USER': 'errorcv',
+            'PASSWORD': 'errorcv',
+            'HOST': 'localhost',
+            'PORT': '',
+     }
+  }
 
 
 # Password validation
