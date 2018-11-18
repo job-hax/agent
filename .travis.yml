@@ -6,7 +6,11 @@ install:
 services:
   - postgresql
 before_script:
-  - psql -c 'create database travis_ci_test;' -U postgres
+  - psql -c 'create database travis_test;' -U postgres
+  - psql -c 'alter user postgres createdb;' -U postgres
+  - psql -c 'create user errorcv with password errorcv;' -U postgres
+  - psql -c 'create database errorcv with owner errorcv;' -U postgres
+  - psql -c 'alter USER errorcv createdb;' -U postgres
 script:
   - tox
 after_success:
