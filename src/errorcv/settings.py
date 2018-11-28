@@ -181,8 +181,8 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.user.user_details',
 )
 
-#SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = os.environ['SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY']
-#SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = os.environ['SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET']
+SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = os.environ['SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY']
+SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = os.environ['SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET']
 # Add email to requested authorizations.
 SOCIAL_AUTH_LINKEDIN_OAUTH2__SCOPE = ['r_fullprofile', 'r_emailaddress', 'r_network']
 # Add the fields so they will be requested from linkedin.
@@ -196,8 +196,8 @@ SOCIAL_AUTH_LINKEDIN_OAUTH2__EXTRA_DATA = [('id', 'id'),
                                    ('industry', 'industry')]
 
 
-#SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=os.environ['SOCIAL_AUTH_GOOGLE_OAUTH2_KEY']
-#SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET=os.environ['SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET']
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=os.environ['SOCIAL_AUTH_GOOGLE_OAUTH2_KEY']
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET=os.environ['SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET']
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_AUTH_EXTRA_ARGUMENTS = {
     'access_type': 'offline',

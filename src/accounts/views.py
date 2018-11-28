@@ -182,7 +182,7 @@ def addJobApplication(request):
    status = int(body['status'])
    source = body['source']
   
-   japp = JobApplication(jobTitle=job_title, company=company, applyDate=applicationdate, msgId='', source =source, user = request.user, companyLogo = '/static/img/errorcvlogotemporary.png')
+   japp = JobApplication(jobTitle=job_title, company=company, applyDate=applicationdate, msgId='', source =source, user = request.user, companyLogo = '/static/images/JobHax-logo-black.svg')
    japp.applicationStatus = ApplicationStatus.objects.get(pk=status)
    japp.save()
    

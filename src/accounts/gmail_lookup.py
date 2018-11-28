@@ -36,7 +36,7 @@ def get_email_detail(service, user_id, msg_id, user, source):
     A Message.
   """
   try:
-    custom_image_url = '/static/images/errorcvlogobright.png'
+    custom_image_url = '/static/images/JobHax-logo-black.svg'
     message = service.users().messages().get(userId=user_id, id=msg_id, format='full').execute()
     jobTitle = ''
     company = ''
