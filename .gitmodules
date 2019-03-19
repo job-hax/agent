@@ -1,0 +1,8 @@
+[submodule "frontend"]
+	path = frontend
+	url = https://github.com/job-hax/frontend
+	branch = master
+[submodule "backend"]
+	path = backend
+	url = https://github.com/job-hax/backend
+	branch = master
